@@ -1,9 +1,117 @@
-<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Chyť krtka!</title><style>
-*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:system-ui,sans-serif;text-align:center;background:#d4f3d0;color:#3b291f}main{max-width:730px;margin:auto;padding:12px}h1{margin:8px 0;font-size:clamp(28px,6vw,44px);color:#6c371c;text-shadow:2px 2px white}.stats{display:flex;justify-content:center;gap:20px;margin:10px auto;font-weight:900;font-size:20px}.stats div{padding:8px 18px;background:#fff7d9;border:3px solid #9e6841;border-radius:18px}.stats strong{color:#a74a25}.meadow{position:relative;margin:10px auto;border:7px solid #a17341;border-radius:22px;overflow:hidden;max-width:640px;background:linear-gradient(#73c5f3 0%,#b8edff 33%,#b3d986 34%,#7bc653 65%,#4ba33a 100%);box-shadow:0 8px 0 #866039;isolation:isolate}.cloud{position:absolute;background:#fff;border-radius:50px;opacity:.86;width:75px;height:21px;top:9%;left:10%;box-shadow:22px -12px 0 5px white,44px 0 0 0 white}.cloud.c2{left:62%;top:15%;transform:scale(.8)}.hill{position:absolute;top:27%;width:85%;height:22%;left:-20%;border-radius:50% 50% 0 0;background:#78b978}.hill.h2{left:44%;background:#6bb171}.tree{position:absolute;right:-2%;top:0;width:26%;height:41%;background:radial-gradient(ellipse at 48% 35%,#76b849 0 46%,#4b923e 47% 75%,transparent 76%);pointer-events:none}.tree:after{content:"";position:absolute;top:45%;left:50%;width:12%;height:85%;background:#8e583a;border-radius:12px;z-index:-1}.garden{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:0;padding:15px 12px 10px;margin-top:21%;background:linear-gradient(#8acc55aa,#57b43b99)}.hole{position:relative;aspect-ratio:1.28;border:0;background:none;padding:0;cursor:pointer;touch-action:manipulation;overflow:hidden}.hole:focus-visible{outline:4px solid #ffe77f;border-radius:22px}.pit{position:absolute;left:8%;right:8%;bottom:12%;height:43%;background:#322019;border:11px solid #85502c;border-bottom-width:16px;border-radius:50%;box-shadow:0 3px 0 4px #b27a47,inset 0 6px 7px #170e0b}.pit:after{content:"";position:absolute;left:-16%;right:-16%;bottom:-13px;height:16px;border-radius:50%;background:repeating-radial-gradient(circle at 10% 50%,#ad7548 0 8px,#875333 9px 16px,#c89458 17px 23px)}.mole{position:absolute;left:19%;width:62%;height:73%;bottom:20%;transform:translateY(85%);opacity:0;visibility:hidden;transition:transform .2s ease-out,opacity .12s;pointer-events:none;filter:drop-shadow(1px 2px 1px #38251c);z-index:1}.hole.active .mole{visibility:visible;opacity:1;transform:translateY(-22%)}.pit{z-index:2;pointer-events:none}.hole.hit .mole{visibility:hidden;opacity:0;transform:translateY(85%)}.mole svg{width:100%;height:100%;overflow:visible}.flowers{position:absolute;bottom:3%;left:5%;font-size:21px;letter-spacing:18px;pointer-events:none}.button{border:4px solid #7b441e;border-radius:21px;background:linear-gradient(#dfa768,#b97637);box-shadow:0 6px 0 #784224;color:#fff8d5;text-shadow:2px 3px #6a3519;padding:10px 40px;font-size:25px;font-weight:1000;cursor:pointer}.button:disabled{opacity:.6;cursor:default}#message{font-weight:800;font-size:21px;min-height:30px;margin:12px}small{display:block;margin:15px}@media(max-width:420px){.meadow{border-width:4px}.garden{padding:8px 3px 6px}.pit{border-width:7px;border-bottom-width:10px}.stats{gap:6px;font-size:16px}.stats div{padding:6px 10px}}@media(prefers-reduced-motion:reduce){.mole{transition:none}}
-</style></head><body><main><h1>🌼 Chyť krtka! 🐹</h1><div class="stats"><div>⭐ Body: <strong id="score">0</strong></div><div>⏱️ Čas: <strong id="time">30</strong></div></div><section class="meadow" aria-label="Louka s devíti krtčími dírami"><div class="cloud"></div><div class="cloud c2"></div><div class="hill"></div><div class="hill h2"></div><div class="tree"></div><div class="garden" id="field"></div><div class="flowers">🌼 🌻 🌼</div></section><p id="message" aria-live="polite">Připravení? Klikněte na START!</p><button class="button" id="start" type="button">▶ START</button><small>30 sekund • Krtek mění díru každé 2 sekundy</small></main><script>
-const field=document.getElementById('field'),start=document.getElementById('start'),time=document.getElementById('time'),scoreBox=document.getElementById('score'),msg=document.getElementById('message');const moleSvg='<svg viewBox="0 0 130 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20 125Q0 95 19 46Q33 12 65 16Q104 10 115 52Q130 102 107 130Z" fill="#414044" stroke="#26232b" stroke-width="5"/><path d="M48 20 53 3 65 19 77 2 79 23" fill="#414044" stroke="#26232b" stroke-width="4"/><ellipse cx="73" cy="90" rx="44" ry="45" fill="#c4a995"/><ellipse cx="45" cy="60" rx="16" ry="22" fill="#fff"/><ellipse cx="85" cy="56" rx="17" ry="23" fill="#fff"/><ellipse cx="48" cy="61" rx="7" ry="12" fill="#171a24"/><ellipse cx="88" cy="57" rx="7" ry="12" fill="#171a24"/><circle cx="51" cy="56" r="3" fill="white"/><circle cx="91" cy="52" r="3" fill="white"/><path d="M45 94 Q66 129 88 88" fill="#6a2727" stroke="#3c2421" stroke-width="4"/><ellipse cx="67" cy="109" rx="13" ry="9" fill="#f27d80"/><ellipse cx="100" cy="80" rx="20" ry="14" fill="#d79c85"/><ellipse cx="112" cy="78" rx="13" ry="11" fill="#ed7472" stroke="#a74249" stroke-width="3"/><path d="M100 95 124 103 M98 100 126 115 M37 93 9 96 M36 98 6 107" stroke="#282329" stroke-width="2" fill="none"/><ellipse cx="30" cy="125" rx="26" ry="15" fill="#edb59e" stroke="#7e5545" stroke-width="3"/><ellipse cx="105" cy="125" rx="24" ry="15" fill="#edb59e" stroke="#7e5545" stroke-width="3"/></svg>';const holes=[];let score=0,left=30,active=-1,playing=false,clock,movement;
-for(let i=0;i<9;i++){const btn=document.createElement('button');btn.className='hole';btn.type='button';btn.setAttribute('aria-label','Díra '+(i+1));btn.innerHTML='<span class="pit"></span><span class="mole">'+moleSvg+'</span>';btn.addEventListener('click',()=>{if(!playing||active!==i)return;scoreBox.textContent=String(++score);btn.classList.add('hit');btn.classList.remove('active');active=-1});holes.push(btn);field.append(btn)}
-function move(){holes.forEach(h=>h.classList.remove('active','hit'));if(!playing)return;let n=Math.floor(Math.random()*9);if(n===active)n=(n+1+Math.floor(Math.random()*8))%9;active=n;holes[n].classList.add('active')}
-function end(){playing=false;clearInterval(clock);clearInterval(movement);active=-1;holes.forEach(h=>h.classList.remove('active','hit'));msg.textContent='🏆 Konec hry! Získali jste '+score+' bodů!';start.disabled=false;start.textContent='↻ HRÁT ZNOVU'}
-start.addEventListener('click',()=>{clearInterval(clock);clearInterval(movement);playing=true;score=0;left=30;active=-1;scoreBox.textContent='0';time.textContent='30';msg.textContent='Chytejte krtka!';start.disabled=true;move();movement=setInterval(move,2000);clock=setInterval(()=>{time.textContent=String(--left);if(left<=0)end()},1000)});
-</script></body></html>
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chyť krtka! – v1.1</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;font-family:system-ui,Arial,sans-serif;text-align:center;color:#203322;background:linear-gradient(#aee9ff 0%,#e1f9ff 42%,#9bdb71 42%,#65b34c 100%);padding:18px}
+  main{max-width:610px;margin:0 auto}
+  h1{font-size:clamp(2rem,7vw,3rem);margin:8px 0}
+  .subtitle{margin:0 0 14px;font-size:1.1rem}
+  .stats{display:flex;justify-content:space-around;gap:12px;margin:15px auto;padding:12px;border-radius:18px;background:#ffffffdc;max-width:500px;font-size:1.25rem;font-weight:700}
+  .stats span{display:block;font-size:1.8rem;color:#236b27}
+  .field{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:510px;margin:12px auto 18px;padding:15px;border-radius:25px;background:#4caa44;border:7px solid #3b8e37}
+  .hole{position:relative;aspect-ratio:1.15;background:transparent;border:0;cursor:pointer;touch-action:manipulation;padding:0;overflow:hidden}
+  .hole:focus-visible{outline:4px solid #fff36f;border-radius:22px}
+  .dirt{position:absolute;left:5%;right:5%;bottom:7%;height:48%;border-radius:50%;background:#493021;box-shadow:inset 0 8px 5px #291910,0 7px 0 #8d5b33}
+  .mole{position:absolute;left:15%;bottom:14%;width:70%;height:76%;transform:translateY(125%);transition:transform .12s ease-out;pointer-events:none}
+  .hole.active .mole{transform:translateY(0)}
+  .face{position:absolute;inset:7% 8% 0;background:#94603f;border-radius:49% 49% 42% 42%;border:3px solid #59371f}
+  .ear{position:absolute;top:12%;height:27%;width:27%;background:#a77252;border:3px solid #59371f;border-radius:50%}
+  .ear.left{left:0}.ear.right{right:0}
+  .eye{position:absolute;top:41%;width:9%;height:11%;background:#211711;border-radius:50%}
+  .eye.left{left:33%}.eye.right{right:33%}
+  .nose{position:absolute;top:55%;left:42%;width:16%;height:13%;background:#f39ab0;border-radius:50%}
+  .paw{position:absolute;bottom:0;width:29%;height:17%;background:#bd8a67;border-radius:45%;border:2px solid #59371f}
+  .paw.left{left:9%}.paw.right{right:9%}
+  .hole.hit .face{background:#d8a15b}
+  button#start{font:700 1.3rem system-ui;border:none;border-radius:999px;background:#ffd53d;padding:15px 32px;box-shadow:0 5px 0 #c59c20;cursor:pointer;color:#302609}
+  button#start:active{transform:translateY(3px);box-shadow:0 2px 0 #c59c20}
+  #message{min-height:2em;font-size:1.25rem;font-weight:700;margin:12px}
+  footer{font-size:.9rem;margin:14px}
+  @media(max-width:390px){.field{gap:5px;padding:7px;border-width:5px}.stats{font-size:1rem}}
+  @media(prefers-reduced-motion:reduce){.mole{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>🐹 Chyť krtka!</h1>
+<p class="subtitle">Klikni na krtka co nejrychleji!</p>
+<div class="stats">
+ <div>⭐ Body <span id="score">0</span></div>
+ <div>⏱️ Čas <span id="time">30</span></div>
+</div>
+<div class="field" id="field" aria-label="Devět děr">
+</div>
+<p id="message" aria-live="polite">Připraven? Klikni na START!</p>
+<button id="start" type="button">▶️ START</button>
+<footer>Hra trvá 30 sekund. Krtek mění díru každé 2 sekundy. · Verze 1.1</footer>
+</main>
+<script>
+const field = document.getElementById('field');
+const scoreDisplay = document.getElementById('score');
+const timeDisplay = document.getElementById('time');
+const message = document.getElementById('message');
+const start = document.getElementById('start');
+let score = 0;
+let remaining = 30;
+let activeHole = -1;
+let running = false;
+let clockTimer = null;
+let moleTimer = null;
+const holes = [];
+for(let i=0;i<9;i++){
+  const hole = document.createElement('button');
+  hole.type='button';
+  hole.className='hole';
+  hole.setAttribute('aria-label','Díra '+(i+1));
+  hole.innerHTML='<span class="dirt"></span><span class="mole"><span class="ear left"></span><span class="ear right"></span><span class="face"><span class="eye left"></span><span class="eye right"></span><span class="nose"></span></span><span class="paw left"></span><span class="paw right"></span></span>';
+  hole.addEventListener('click',()=>{
+    if(!running || activeHole!==i)return;
+    score++;
+    scoreDisplay.textContent=String(score);
+    hole.classList.add('hit');
+    hole.classList.remove('active');
+    activeHole=-1;
+  });
+  holes.push(hole);
+  field.appendChild(hole);
+}
+function popMole(){
+  holes.forEach(h=>h.classList.remove('active','hit'));
+  if(!running)return;
+  let next = Math.floor(Math.random()*9);
+  if(next===activeHole)next=(next+1+Math.floor(Math.random()*8))%9;
+  activeHole=next;
+  holes[next].classList.add('active');
+}
+function finish(){
+  running=false;
+  clearInterval(clockTimer);
+  clearInterval(moleTimer);
+  holes.forEach(h=>h.classList.remove('active','hit'));
+  activeHole=-1;
+  message.textContent='🏆 Konec hry! Získal jsi '+score+' bodů!';
+  start.disabled=false;
+  start.textContent='🔄 HRÁT ZNOVU';
+}
+start.addEventListener('click',()=>{
+  clearInterval(clockTimer);
+  clearInterval(moleTimer);
+  score=0;remaining=30;activeHole=-1;running=true;
+  scoreDisplay.textContent='0';timeDisplay.textContent='30';
+  message.textContent='Chytej krtka! 🐹';
+  start.disabled=true;
+  popMole();
+  moleTimer=setInterval(popMole,2000);
+  clockTimer=setInterval(()=>{
+    remaining--;
+    timeDisplay.textContent=String(remaining);
+    if(remaining<=0)finish();
+  },1000);
+});
+</script>
+</body>
+</html>
