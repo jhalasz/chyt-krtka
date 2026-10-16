@@ -47,7 +47,7 @@
 </div>
 <p id="message" aria-live="polite">Připraven? Klikni na START!</p>
 <button id="start" type="button">▶️ START</button>
-<footer>Hra trvá 30 sekund. Krtek mění díru každou 1 sekundu.</footer>
+<footer>Hra trvá 30 sekund. Krtek mění díru každé 2 sekundy.</footer>
 </main>
 <script>
 const field = document.getElementById('field');
@@ -105,7 +105,7 @@ start.addEventListener('click',()=>{
   message.textContent='Chytej krtka! 🐹';
   start.disabled=true;
   popMole();
-  moleTimer=setInterval(popMole,1000);
+  moleTimer=setInterval(popMole,2000);
   clockTimer=setInterval(()=>{
     remaining--;
     timeDisplay.textContent=String(remaining);
