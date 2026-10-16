@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Chyť krtka! – v1.1</title>
+<title>Chyť krtka! – v1.2</title>
 <style>
   *{box-sizing:border-box}
   body{margin:0;min-height:100vh;font-family:system-ui,Arial,sans-serif;text-align:center;color:#203322;background:linear-gradient(#aee9ff 0%,#e1f9ff 42%,#9bdb71 42%,#65b34c 100%);padding:18px}
@@ -47,7 +47,7 @@
 </div>
 <p id="message" aria-live="polite">Připraven? Klikni na START!</p>
 <button id="start" type="button">▶️ START</button>
-<footer>Hra trvá 30 sekund. Krtek mění díru každé 2 sekundy. · Verze 1.1</footer>
+<footer>Hra trvá 30 sekund. Krtek postupně zrychluje (2 s → 0,7 s). · Verze 1.2</footer>
 </main>
 <script>
 const field = document.getElementById('field');
@@ -61,6 +61,13 @@ let activeHole = -1;
 let running = false;
 let clockTimer = null;
 let moleTimer = null;
+let elapsed = 0;
+function nextMole(){
+  if(!running)return;
+  popMole();
+  const delay = Math.max(700,2000-Math.floor(elapsed/5)*250);
+  moleTimer=setTimeout(nextMole,delay);
+}
 const holes = [];
 for(let i=0;i<9;i++){
   const hole = document.createElement('button');
@@ -100,14 +107,14 @@ function finish(){
 start.addEventListener('click',()=>{
   clearInterval(clockTimer);
   clearInterval(moleTimer);
-  score=0;remaining=30;activeHole=-1;running=true;
+  score=0;remaining=30;elapsed=0;activeHole=-1;running=true;
   scoreDisplay.textContent='0';timeDisplay.textContent='30';
   message.textContent='Chytej krtka! 🐹';
   start.disabled=true;
-  popMole();
-  moleTimer=setInterval(popMole,2000);
+  nextMole();
   clockTimer=setInterval(()=>{
     remaining--;
+    elapsed++;
     timeDisplay.textContent=String(remaining);
     if(remaining<=0)finish();
   },1000);
