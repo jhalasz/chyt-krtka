@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pexeso – nepravidelná slovesa</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#17324d;background:#edf5ff}*{box-sizing:border-box}
+body{margin:0;padding:18px}main{max-width:650px;margin:auto;text-align:center}
+h1{font-size:clamp(1.45rem,5vw,2.3rem);margin:10px 0}p{line-height:1.4}
+.stats{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin:16px 0}.stats span{background:white;border-radius:12px;padding:10px 12px;font-weight:700}
+.board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px auto}
+.card{aspect-ratio:1.1;min-width:0;border:0;border-radius:15px;background:#2563eb;color:white;font:700 clamp(.83rem,3.5vw,1.28rem) system-ui;cursor:pointer;box-shadow:0 4px 0 #16419e;touch-action:manipulation;transition:background .15s}
+.card:focus-visible{outline:4px solid #f59e0b;outline-offset:2px}.card.open{background:#fff;color:#15345a;box-shadow:0 2px 8px #b8c9de}.card.matched{background:#b8f0ce;color:#14532d;box-shadow:none}.card:disabled{cursor:default}
+button.restart{background:#f59e0b;border:0;border-radius:13px;padding:13px 24px;font-size:1rem;font-weight:800;cursor:pointer}
+#message{min-height:27px;font-weight:700}small{color:#52708c}
+@media(max-width:400px){body{padding:10px}.board{gap:7px}.card{border-radius:10px}}
+</style></head><body><main>
+<h1>🇬🇧 Pexeso: nepravidelná slovesa</h1>
+<p>Najdi dvojice: základní tvar slovesa a jeho minulý čas. Například <b>go</b> a <b>went</b>.</p>
+<div class="stats"><span>⏱️ Čas: <b id="time">0:00</b></span><span>🎯 Tahy: <b id="moves">0</b></span><span>🏆 Rekord: <b id="best">—</b></span></div>
+<div id="board" class="board" aria-label="Herní plocha pexesa"></div>
+<p id="message" role="status" aria-live="polite">Otoč první kartičku!</p>
+<button class="restart" id="restart">🔄 Nová hra</button><p><small>8 dvojic · 16 kartiček · verze 1.0</small></p>
+</main><script>
+"use strict";
+const verbs=[["go","went"],["eat","ate"],["see","saw"],["write","wrote"],["take","took"],["come","came"],["give","gave"],["make","made"]];
+const board=document.getElementById("board"), timeEl=document.getElementById("time"),movesEl=document.getElementById("moves"),message=document.getElementById("message"),bestEl=document.getElementById("best");
+let cards=[],first=null,second=null,moves=0,matched=0,seconds=0,timer=null,locked=false,delay=null,started=false;
+const format=s=>Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
+function readBest(){try{return JSON.parse(localStorage.getItem("verbMemoryBestV1")||"null")}catch{return null}}
+function showBest(){const b=readBest();bestEl.textContent=b?b.moves+" tahů / "+format(b.seconds):"—"}
+function stopTimer(){clearInterval(timer);timer=null}
+function newGame(){stopTimer();clearTimeout(delay);first=second=null;moves=matched=seconds=0;started=locked=false;timeEl.textContent="0:00";movesEl.textContent="0";message.textContent="Otoč první kartičku!";
+cards=verbs.flatMap((pair,i)=>pair.map(word=>({word,pair:i,open:false,matched:false})));
+for(let i=cards.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[cards[i],cards[j]]=[cards[j],cards[i]]}
+render();showBest()}
+function render(){board.replaceChildren();cards.forEach((c,i)=>{const b=document.createElement("button");b.type="button";b.className="card"+(c.matched?" matched":c.open?" open":"");b.textContent=c.open||c.matched?c.word:"?";b.setAttribute("aria-label",c.open||c.matched?c.word:"Skrytá kartička "+(i+1));b.disabled=c.matched||c.open;b.addEventListener("click",()=>flip(i));board.append(b)})}
+function flip(i){if(locked||cards[i].open||cards[i].matched)return;
+if(!started){started=true;timer=setInterval(()=>{seconds++;timeEl.textContent=format(seconds)},1000)}
+cards[i].open=true;
+if(first===null){first=i;render();return}
+second=i;moves++;movesEl.textContent=String(moves);render();
+const a=cards[first],b=cards[second];
+if(a.pair===b.pair){a.matched=b.matched=true;matched++;first=second=null;message.textContent="✅ Správná dvojice!";render();if(matched===verbs.length){stopTimer();const prev=readBest();if(!prev||moves<prev.moves||(moves===prev.moves&&seconds<prev.seconds)){try{localStorage.setItem("verbMemoryBestV1",JSON.stringify({moves,seconds}))}catch{}message.textContent="🏆 Výborně! Nový rekord: "+moves+" tahů za "+format(seconds)+"!";showBest()}else message.textContent="🎉 Hotovo! "+moves+" tahů za "+format(seconds)+"."}return}
+locked=true;message.textContent="Zkus další dvojici.";delay=setTimeout(()=>{a.open=b.open=false;first=second=null;locked=false;render()},850)}
+document.getElementById("restart").addEventListener("click",newGame);newGame();
+</script></body></html>
