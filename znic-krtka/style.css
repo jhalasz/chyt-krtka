@@ -7,3 +7,26 @@
 .mole .nose{top:55px;left:34px;width:21px;height:16px;background:#f5a0a5;border:2px solid #7b4542}
 .mole .teeth{top:73px;left:30px;width:29px;height:15px;border:2px solid #6b4537}
 @media(max-width:480px){.mole{width:78px;height:84px;bottom:15px}.mole:before{left:8px;width:56px}.mole .eyes{left:6px;width:62px}.mole .nose{left:28px}.mole .teeth{left:25px}}
+
+/* VERZE 1.4 – jasně rozpoznatelný krtek a viditelná hráčská postava */
+.holes{z-index:2}
+.hole{z-index:2;overflow:visible}
+.mole{position:absolute;display:block;z-index:8;bottom:23px;left:50%;transform:translateX(-50%);width:clamp(76px,10vw,104px);height:100px;border:4px solid #54301f;border-radius:48% 48% 35% 35%;background:radial-gradient(ellipse at 48% 25%,#c28b63 0 12%,#986044 45%,#69412e 100%);box-shadow:0 4px 0 #422719;animation:pop .18s ease-out;cursor:pointer;user-select:none}
+.mole:before{content:"";position:absolute;z-index:3;top:-22px;left:7px;width:65px;height:27px;border:4px solid #17365e;border-radius:28px 28px 6px 6px;background:#245a9b;transform:rotate(-5deg)}
+.mole:after{content:"";position:absolute;z-index:4;top:-15px;left:29px;color:white;font-size:11px;font-weight:1000}
+.mole .mole-cap{position:absolute;top:-15px;left:25px;z-index:5;color:white;font-size:11px;font-weight:900}
+.mole .eyes{position:absolute;top:29px;left:7px;width:69px;height:23px;border:4px solid #202020;border-radius:9px;background:#d8e8ef;color:#17212b;font-size:14px;line-height:14px;letter-spacing:7px;text-align:center;padding-left:5px}
+.mole .nose{position:absolute;top:56px;left:31px;width:23px;height:17px;border:2px solid #79453b;border-radius:50%;background:#f3a0a0}
+.mole .teeth{position:absolute;top:75px;left:28px;width:29px;height:13px;border:2px solid #704332;border-radius:2px 2px 8px 8px;background:#fff}
+.player-stage{position:absolute!important;left:12px!important;bottom:5px!important;width:112px!important;height:174px!important;z-index:12!important;display:block!important;pointer-events:none;background:transparent}
+.player-head{position:absolute;left:29px;top:34px;width:57px;height:61px;border:3px solid #8c5739;border-radius:45% 45% 48% 48%;background:#efbd91;z-index:3}
+.player-cap{position:absolute;left:24px;top:23px;width:67px;height:25px;border:4px solid #102e57;border-radius:28px 28px 6px 6px;background:#2365a8;z-index:4;transform:rotate(-5deg)}
+.player-cap:after{content:"";position:absolute;right:-12px;bottom:-5px;width:35px;height:8px;border-radius:50%;background:#174578}
+.player-eyes{position:absolute;top:20px;left:10px;color:#17314a;font-size:12px;letter-spacing:9px}
+.player-smile{position:absolute;left:18px;top:39px;width:20px;height:9px;border-bottom:3px solid #8b3c36;border-radius:50%}
+.player-body{position:absolute;left:22px;top:88px;width:72px;height:55px;border:3px solid #163e71;border-radius:17px 17px 8px 8px;background:#347fc2;z-index:2}
+.player-legs{position:absolute;left:32px;top:137px;width:58px;height:35px;display:flex;justify-content:space-between}
+.player-legs i{display:block;width:18px;height:32px;border-radius:5px 5px 3px 3px;background:#263d65;border-bottom:6px solid #252525}
+.player-stage.girl .player-cap{background:#ed5b9d;border-color:#a92e68}
+.player-stage.girl .player-body{background:#ee83b1;border-color:#a92e68}
+@media(max-width:480px){.player-stage{transform:scale(.82);transform-origin:bottom left}.mole{width:75px;height:91px;bottom:18px}.mole .eyes{left:4px;width:65px}}
