@@ -1,5 +1,5 @@
 const $=id=>document.getElementById(id);
-let gender='boy',score=0,hits=0,remaining=60,runCoins=0,spawnLoop=null,clock=null,active=-1,moleTimeout=null,gameRunning=false;
+let gender='boy',score=0,hits=0,remaining=60,runCoins=0,spawnLoop=null,clock=null,active=-1,moleTimeout=null,gameRunning=false,deadline=0;
 let coins=Number(localStorage.getItem('zk-coins')||0);
 let owned=JSON.parse(localStorage.getItem('zk-owned')||'["basic"]');
 const items=[{id:'basic',name:'Základní styl',look:'🧢',price:0},{id:'pink',name:'Růžová lopata',look:'🌸',price:30},{id:'gold',name:'Zlatá lopata',look:'🥇',price:60},{id:'cool',name:'Brýle frajer',look:'😎',price:90},{id:'rainbow',name:'Duhový styl',look:'🌈',price:130}];
@@ -9,33 +9,37 @@ function show(id){['home','game','result','shop'].forEach(x=>$(x).classList.togg
 function makeHoles(){$('holes').innerHTML='';for(let i=0;i<6;i++){const h=document.createElement('button');h.className='hole';h.setAttribute('aria-label','Díra '+(i+1));h.onclick=()=>whack(i);$('holes').append(h)}}
 function spawnMole(){
  if(!gameRunning||active!==-1)return;
- const i=Math.floor(Math.random()*6),hole=document.querySelectorAll('.hole')[i],m=document.createElement('div');
- m.className='mole';
- m.innerHTML='<span class="eyes">✦ ✦</span><span class="nose"></span><span class="teeth"></span>';
- m.setAttribute('aria-label','Krtek v brýlích a kšiltovce');
+ const holes=document.querySelectorAll('.hole');if(!holes.length)return;
+ const i=Math.floor(Math.random()*holes.length),m=document.createElement('div');m.className='mole';
+ m.innerHTML='<span class="mole-cap">NY</span><span class="eyes">●　●</span><span class="nose"></span><span class="teeth"></span>';
+ m.setAttribute('role','button');m.setAttribute('aria-label','Krtek s brýlemi a kšiltovkou');
  m.onclick=e=>{e.stopPropagation();whack(i)};
- hole.append(m);active=i;
- moleTimeout=setTimeout(()=>{if(gameRunning&&active===i){m.remove();active=-1;taunt()}},1050);
+ holes[i].append(m);active=i;
+ moleTimeout=setTimeout(()=>{if(gameRunning&&active===i){m.remove();active=-1;taunt()}},1250);
 }
-function taunt(){$('toast').textContent='HAHA!';setTimeout(()=>{if($('toast').textContent==='HAHA!')$('toast').textContent=''},600)}
+function taunt(){$('toast').textContent='HAHA!';setTimeout(()=>{if($('toast').textContent==='HAHA!')$('toast').textContent=''},650)}
 function whack(i){
  if(!gameRunning)return;
  if(active!==i){taunt();return}
- clearTimeout(moleTimeout);
- const m=document.querySelector('.mole');if(m)m.remove();active=-1;hits++;score+=10;
+ clearTimeout(moleTimeout);const m=document.querySelector('.mole');if(m)m.remove();active=-1;hits++;score+=10;
  $('score').textContent=score;$('hits').textContent='Zásahy: '+hits;
  $('swing').classList.remove('show');void $('swing').offsetWidth;$('swing').classList.add('show');
  $('toast').textContent='BUM! +10';setTimeout(()=>{if($('toast').textContent==='BUM! +10')$('toast').textContent=''},350);
 }
 function fmt(s){return '00:'+String(s).padStart(2,'0')}
-function tick(){if(!gameRunning)return;remaining=Math.max(0,remaining-1);$('time').textContent=fmt(remaining);if(remaining===0)finish()}
+function updateClock(){
+ if(!gameRunning)return;
+ remaining=Math.max(0,Math.ceil((deadline-Date.now())/1000));
+ $('time').textContent=fmt(remaining);
+ if(Date.now()>=deadline)finish();
+}
 function start(){
  clearInterval(clock);clearInterval(spawnLoop);clearTimeout(moleTimeout);
- score=0;hits=0;runCoins=0;remaining=60;active=-1;gameRunning=true;
+ score=0;hits=0;runCoins=0;remaining=60;active=-1;gameRunning=true;deadline=Date.now()+60000;
  $('score').textContent='0';$('runCoins').textContent='0';$('hits').textContent='Zásahy: 0';$('time').textContent='01:00';$('toast').textContent='';
  $('playerStage').classList.toggle('girl',gender==='girl');
  $('swing').classList.remove('show');makeHoles();show('game');
- spawnMole();spawnLoop=setInterval(spawnMole,1250);clock=setInterval(tick,1000);
+ spawnMole();spawnLoop=setInterval(spawnMole,700);clock=setInterval(updateClock,100);
 }
 function finish(){
  if(!gameRunning)return;gameRunning=false;clearInterval(clock);clearInterval(spawnLoop);clearTimeout(moleTimeout);
