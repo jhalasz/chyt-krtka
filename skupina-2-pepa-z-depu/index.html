@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chyť krtka Pepu z depu</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;color:#fff;background:linear-gradient(#83c9ed 0 35%,#4c9a48 35% 100%);min-height:100vh;text-align:center}
+main{max-width:900px;margin:auto;padding:16px}.panel{background:#173f2bdc;border:3px solid #d8efad;border-radius:20px;padding:14px;box-shadow:0 5px 0 #244c2c}
+h1{font-size:clamp(25px,5vw,42px);margin:4px}.stats{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;font-size:clamp(18px,3vw,24px);font-weight:800;margin:12px}
+.forest{position:relative;margin:12px auto;padding:20px 12px 24px;border-radius:24px;background:linear-gradient(#8ed36d,#43833d);border:5px solid #d5eaa4;overflow:hidden}
+.trees{font-size:clamp(25px,5vw,48px);letter-spacing:7px;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,3vw,24px);max-width:650px;margin:8px auto}
+.hole{height:clamp(105px,20vw,150px);border:0;background:radial-gradient(ellipse,#241b15 0 48%,#79502c 50% 60%,#4b8137 62%);border-radius:50%;position:relative;cursor:pointer;touch-action:manipulation;overflow:hidden}
+.mole{position:absolute;left:50%;top:13%;transform:translateX(-50%);width:62%;height:72%;border-radius:48% 48% 40% 40%;background:#171719;border:3px solid #080809;display:none}
+.hole.up .mole{display:block}.hair{position:absolute;top:-14px;left:20%;width:60%;height:18px;color:#171719;font-size:25px;letter-spacing:3px;line-height:1}
+.eyes{display:flex;justify-content:center;gap:17%;margin-top:26%;font-size:clamp(14px,3vw,23px)}.eye{width:12px;height:16px;border-radius:50%;background:#258be8;border:2px solid white}
+.nose{margin:2px auto 0;width:17px;height:12px;background:#ff9db7;border-radius:60% 60% 50% 50%}
+button.start{border:0;border-radius:14px;background:#ffdc46;color:#342600;font-size:22px;font-weight:900;padding:13px 28px;cursor:pointer;box-shadow:0 4px 0 #b68a13}
+button:focus-visible{outline:4px solid white;outline-offset:3px}.help{font-size:15px;margin:8px}.footer{font-size:12px;margin:10px;color:#fff}
+@media(max-width:420px){main{padding:8px}.forest{padding:12px 7px}.grid{gap:7px}.hole{height:105px}}
+</style></head>
+<body><main><section class="panel">
+<h1>🐾 Chyť krtka Pepu z depu! 🌲</h1>
+<div class="stats"><span>⭐ Body: <b id="score">0</b></span><span>⏱️ Čas: <b id="time">60</b> s</span></div>
+<div class="forest"><div class="trees">🌳 🌲 🌳 🌲 🌳</div><div class="grid" id="grid"></div><div class="trees">🌿 🌼 🍄 🌼 🌿</div></div>
+<button class="start" id="start">START HRY</button>
+<p class="help">Tref Pepu = +2 body. Klik vedle = −1 bod. Máš 60 sekund!</p>
+<div id="message" aria-live="polite">Připrav se na lesní honičku!</div>
+</section><div class="footer">Verze 1.0</div></main>
+<script>
+const grid=document.getElementById('grid'),scoreEl=document.getElementById('score'),timeEl=document.getElementById('time'),msg=document.getElementById('message'),start=document.getElementById('start');
+let score=0,time=60,active=false,current=-1,timer=null,moleTimer=null;
+for(let i=0;i<9;i++){const h=document.createElement('button');h.className='hole';h.setAttribute('aria-label','Lesní díra '+(i+1));h.innerHTML='<span class="mole"><span class="hair">ııı</span><span class="eyes"><i class="eye"></i><i class="eye"></i></span><span class="nose"></span></span>';h.addEventListener('click',()=>hit(i));grid.appendChild(h)}
+const holes=[...grid.children];
+function hide(){holes.forEach(h=>h.classList.remove('up'));current=-1}
+function pop(){if(!active)return;hide();let n=Math.floor(Math.random()*9);current=n;holes[n].classList.add('up');moleTimer=setTimeout(()=>{hide();if(active)pop()},850)}
+function hit(i){if(!active)return;if(i===current){score+=2;msg.textContent='Paráda! Pepa chycen! +2';clearTimeout(moleTimer);hide();pop()}else{score-=1;msg.textContent='Vedle! −1 bod';}scoreEl.textContent=score}
+function end(){active=false;clearInterval(timer);clearTimeout(moleTimer);hide();start.textContent='HRÁT ZNOVU';msg.textContent='Konec hry! Získal/a jsi '+score+' bodů. Skvělá práce!'}
+start.addEventListener('click',()=>{clearInterval(timer);clearTimeout(moleTimer);score=0;time=60;active=true;scoreEl.textContent=score;timeEl.textContent=time;msg.textContent='Chytej Pepu!';start.textContent='HRA BĚŽÍ';pop();timer=setInterval(()=>{time--;timeEl.textContent=time;if(time<=0)end()},1000)});
+</script></body></html>
