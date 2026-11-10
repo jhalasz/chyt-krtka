@@ -7,14 +7,30 @@
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;color:#fff;background:linear-gradient(#83c9ed 0 35%,#4c9a48 35% 100%);min-height:100vh;text-align:center}
 main{max-width:900px;margin:auto;padding:16px}.panel{background:#173f2bdc;border:3px solid #d8efad;border-radius:20px;padding:14px;box-shadow:0 5px 0 #244c2c}
 h1{font-size:clamp(25px,5vw,42px);margin:4px}.stats{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;font-size:clamp(18px,3vw,24px);font-weight:800;margin:12px}
-.forest{position:relative;margin:12px auto;padding:20px 12px 24px;border-radius:24px;background:linear-gradient(#8ed36d,#43833d);border:5px solid #d5eaa4;overflow:hidden}
+.forest{position:relative;margin:12px auto;padding:20px 12px 24px;border-radius:24px;background:linear-gradient(#8ed36d,#43833d);border:5px solid #d5eaa4;overflow:hidden;transition:background .5s}
+.forest[data-scene="0"]{background:linear-gradient(#8ed36d,#43833d)}
+.forest[data-scene="1"]{background:linear-gradient(#263b68,#405c70)}
+.forest[data-scene="2"]{background:linear-gradient(#d99b53,#9a593b)}
+.forest[data-scene="3"]{background:linear-gradient(#e8f6ff,#9bc8e5)}
+.forest[data-scene="4"]{background:linear-gradient(#4bbd86,#16705c)}
+.forest[data-scene="5"]{background:linear-gradient(#533b83,#a16cba)}
 .trees{font-size:clamp(25px,5vw,48px);letter-spacing:7px;line-height:1.5}
+.scene-name{font-weight:800;text-shadow:0 2px 3px #19351d;margin:2px 0 8px}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,3vw,24px);max-width:650px;margin:8px auto}
 .hole{height:clamp(105px,20vw,150px);border:0;background:radial-gradient(ellipse,#241b15 0 48%,#79502c 50% 60%,#4b8137 62%);border-radius:50%;position:relative;cursor:pointer;touch-action:manipulation;overflow:hidden}
-.mole{position:absolute;left:50%;top:13%;transform:translateX(-50%);width:62%;height:72%;border-radius:48% 48% 40% 40%;background:#171719;border:3px solid #080809;display:none}
-.hole.up .mole{display:block}.hair{position:absolute;top:-14px;left:20%;width:60%;height:18px;color:#171719;font-size:25px;letter-spacing:3px;line-height:1}
-.eyes{display:flex;justify-content:center;gap:17%;margin-top:26%;font-size:clamp(14px,3vw,23px)}.eye{width:12px;height:16px;border-radius:50%;background:#258be8;border:2px solid white}
-.nose{margin:2px auto 0;width:17px;height:12px;background:#ff9db7;border-radius:60% 60% 50% 50%}
+.mole{position:absolute;left:50%;top:15%;transform:translateX(-50%);width:66%;height:76%;border-radius:48% 48% 40% 40%;background:linear-gradient(145deg,#d9a16c,#b97845);border:3px solid #87502e;display:none;box-shadow:inset -5px -5px 0 #a9693d}
+.hole.up .mole{display:block}
+.hair{position:absolute;top:-14px;left:20%;width:60%;height:18px;color:#b97845;font-size:25px;letter-spacing:3px;line-height:1}
+.eyes{display:flex;justify-content:center;gap:17%;margin-top:30%;font-size:clamp(14px,3vw,23px)}
+.eye{width:14px;height:17px;border-radius:50%;background:#fff;border:2px solid #52311f;position:relative}
+.eye:after{content:"";position:absolute;width:6px;height:8px;border-radius:50%;background:#29201b;left:4px;top:4px}
+.shades{position:absolute;top:39%;left:16%;width:68%;display:flex;justify-content:space-between;z-index:3}
+.shades i{display:block;width:42%;height:12px;border-radius:4px 4px 8px 8px;background:#171b25;border:2px solid #080b10;box-shadow:inset 0 2px 2px #657080}
+.shades:after{content:"";position:absolute;left:43%;top:3px;width:14%;height:3px;background:#171b25}
+.cap{position:absolute;top:-11%;left:12%;width:76%;height:25%;background:#526d91;border:2px solid #30445e;border-radius:65% 65% 18% 18%;z-index:4;transform:rotate(-3deg)}
+.cap:after{content:"";position:absolute;bottom:-5px;left:8%;width:90%;height:7px;border-radius:50%;background:#30445e}
+.cap-patch{position:absolute;left:40%;top:1px;font-size:clamp(10px,2vw,17px);line-height:1}
+.nose{position:relative;z-index:2;margin:18px auto 0;width:17px;height:12px;background:#f39bb0;border-radius:60% 60% 50% 50%}
 button.start{border:0;border-radius:14px;background:#ffdc46;color:#342600;font-size:22px;font-weight:900;padding:13px 28px;cursor:pointer;box-shadow:0 4px 0 #b68a13}
 button:focus-visible{outline:4px solid white;outline-offset:3px}.help{font-size:15px;margin:8px}.footer{font-size:12px;margin:10px;color:#fff}
 @media(max-width:420px){main{padding:8px}.forest{padding:12px 7px}.grid{gap:7px}.hole{height:105px}}
@@ -22,19 +38,28 @@ button:focus-visible{outline:4px solid white;outline-offset:3px}.help{font-size:
 <body><main><section class="panel">
 <h1>🐾 Chyť krtka Pepu z depu! 🌲</h1>
 <div class="stats"><span>⭐ Body: <b id="score">0</b></span><span>⏱️ Čas: <b id="time">60</b> s</span></div>
-<div class="forest"><div class="trees">🌳 🌲 🌳 🌲 🌳</div><div class="grid" id="grid"></div><div class="trees">🌿 🌼 🍄 🌼 🌿</div></div>
+<div class="forest" id="forest" data-scene="0"><div class="trees" id="treesTop">🌳 🌲 🌳 🌲 🌳</div><div class="scene-name" id="sceneName">🌳 Zelený les</div><div class="grid" id="grid"></div><div class="trees" id="treesBottom">🌿 🌼 🍄 🌼 🌿</div></div>
 <button class="start" id="start">START HRY</button>
 <p class="help">Tref Pepu = +2 body. Klik vedle = −1 bod. Máš 60 sekund!</p>
 <div id="message" aria-live="polite">Připrav se na lesní honičku!</div>
-</section><div class="footer">Verze 1.0</div></main>
+</section><div class="footer">Verze 1.1</div></main>
 <script>
-const grid=document.getElementById('grid'),scoreEl=document.getElementById('score'),timeEl=document.getElementById('time'),msg=document.getElementById('message'),start=document.getElementById('start');
+const grid=document.getElementById('grid'),scoreEl=document.getElementById('score'),timeEl=document.getElementById('time'),msg=document.getElementById('message'),start=document.getElementById('start'),forest=document.getElementById('forest'),sceneName=document.getElementById('sceneName'),treesTop=document.getElementById('treesTop'),treesBottom=document.getElementById('treesBottom');
 let score=0,time=60,active=false,current=-1,timer=null,moleTimer=null;
-for(let i=0;i<9;i++){const h=document.createElement('button');h.className='hole';h.setAttribute('aria-label','Lesní díra '+(i+1));h.innerHTML='<span class="mole"><span class="hair">ııı</span><span class="eyes"><i class="eye"></i><i class="eye"></i></span><span class="nose"></span></span>';h.addEventListener('click',()=>hit(i));grid.appendChild(h)}
+const scenes=[
+{name:'🌳 Zelený les',top:'🌳 🌲 🌳 🌲 🌳',bottom:'🌿 🌼 🍄 🌼 🌿'},
+{name:'🌙 Noční les',top:'🌙 ✨ 🌲 ⭐ 🌲',bottom:'🌌 🌿 ✨ 🌿 🌌'},
+{name:'🍂 Podzimní les',top:'🍁 🌳 🍂 🌲 🍁',bottom:'🍂 🍄 🍁 🍄 🍂'},
+{name:'❄️ Zasněžený les',top:'❄️ 🌲 ☃️ 🌲 ❄️',bottom:'❄️ ⛄ ❄️ 🌲 ❄️'},
+{name:'🌴 Džungle',top:'🌴 🌿 🌴 🌿 🌴',bottom:'🌺 🌿 🪴 🌿 🌺'},
+{name:'✨ Kouzelný les',top:'✨ 🍄 ⭐ 🍄 ✨',bottom:'🌟 🍄 ✨ 🍄 🌟'}
+];
+function setScene(index){const s=scenes[index];forest.dataset.scene=String(index);sceneName.textContent=s.name;treesTop.textContent=s.top;treesBottom.textContent=s.bottom}
+for(let i=0;i<9;i++){const h=document.createElement('button');h.className='hole';h.setAttribute('aria-label','Lesní díra '+(i+1));h.innerHTML='<span class="mole"><span class="cap"><span class="cap-patch">🦫</span></span><span class="hair">ııı</span><span class="eyes"><i class="eye"></i><i class="eye"></i></span><span class="shades"><i></i><i></i></span><span class="nose"></span></span>';h.addEventListener('click',()=>hit(i));grid.appendChild(h)}
 const holes=[...grid.children];
 function hide(){holes.forEach(h=>h.classList.remove('up'));current=-1}
 function pop(){if(!active)return;hide();let n=Math.floor(Math.random()*9);current=n;holes[n].classList.add('up');moleTimer=setTimeout(()=>{hide();if(active)pop()},850)}
 function hit(i){if(!active)return;if(i===current){score+=2;msg.textContent='Paráda! Pepa chycen! +2';clearTimeout(moleTimer);hide();pop()}else{score-=1;msg.textContent='Vedle! −1 bod';}scoreEl.textContent=score}
 function end(){active=false;clearInterval(timer);clearTimeout(moleTimer);hide();start.textContent='HRÁT ZNOVU';msg.textContent='Konec hry! Získal/a jsi '+score+' bodů. Skvělá práce!'}
-start.addEventListener('click',()=>{clearInterval(timer);clearTimeout(moleTimer);score=0;time=60;active=true;scoreEl.textContent=score;timeEl.textContent=time;msg.textContent='Chytej Pepu!';start.textContent='HRA BĚŽÍ';pop();timer=setInterval(()=>{time--;timeEl.textContent=time;if(time<=0)end()},1000)});
+start.addEventListener('click',()=>{clearInterval(timer);clearTimeout(moleTimer);score=0;time=60;active=true;setScene(0);scoreEl.textContent=score;timeEl.textContent=time;msg.textContent='Chytej Pepu!';start.textContent='HRA BĚŽÍ';pop();timer=setInterval(()=>{time--;timeEl.textContent=time;if(time>0&&time%10===0)setScene((60-time)/10);if(time<=0)end()},1000)});
 </script></body></html>
