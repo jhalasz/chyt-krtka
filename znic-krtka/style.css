@@ -70,3 +70,18 @@ h1{color:#ffd52e;-webkit-text-stroke:1px #39200c;text-shadow:3px 4px #5a2b0b}
 .toast{color:#fff044;text-shadow:3px 3px #57280c,-1px -1px #57280c}
 footer{color:#fff6d4;text-shadow:1px 2px #315a1c}
 @media(max-width:520px){header{padding:9px 12px}.field{height:58vh;min-height:370px}.holes{inset:24% 2% 10%}.mole{width:79px;height:95px}.mole:before{width:61px}.mole .eyes{width:65px;left:4px}}
+
+/* VERZE 1.6 – skutečné obrázky zahrady, krtka a skinů */
+.avatar-art{padding:0;background:#d9efff!important}
+.avatar-art:before,.avatar-art:after{display:none!important}
+.avatar-art img{width:100%;height:100%;object-fit:contain;object-position:center bottom;display:block}
+.field{background-image:url("assets/garden.jpg");background-size:100% 100%;background-position:center;background-repeat:no-repeat;background-color:#69b93d}
+.field:before,.field:after,.sun,.hill{display:none!important}
+.holes{inset:25% 2% 4%;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:0;align-items:stretch}
+.hole{width:100%;height:100%;max-width:none;margin:0;background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+.mole{width:clamp(105px,14vw,150px);height:clamp(110px,15vw,160px);bottom:3px;background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;overflow:visible}
+.mole:before,.mole:after{display:none!important;content:none!important}
+.mole-photo{display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom;pointer-events:none;filter:drop-shadow(0 4px 3px #422313)}
+.player-stage{width:90px!important;height:132px!important;left:10px!important;bottom:4px!important}
+.player-skin-img{width:100%;height:100%;object-fit:contain;object-position:center bottom;display:block;filter:drop-shadow(2px 3px 2px #372315)}
+@media(max-width:520px){.holes{inset:25% 1% 4%}.mole{width:clamp(82px,23vw,112px);height:clamp(88px,25vw,122px)}.avatar-art{height:125px}}

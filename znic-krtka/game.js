@@ -11,7 +11,7 @@ function spawnMole(){
  if(!gameRunning||active!==-1)return;
  const holes=document.querySelectorAll('.hole');if(!holes.length)return;
  const i=Math.floor(Math.random()*holes.length),m=document.createElement('div');m.className='mole';
- m.innerHTML='<span class="mole-cap">NY</span><span class="eyes">●　●</span><span class="nose"></span><span class="teeth"></span>';
+ m.innerHTML='<img class="mole-photo" src="assets/mole.jpg" alt="Frajer krtek s čepicí a brýlemi">';
  m.setAttribute('role','button');m.setAttribute('aria-label','Krtek s brýlemi a kšiltovkou');
  m.onclick=e=>{e.stopPropagation();whack(i)};
  holes[i].append(m);active=i;
@@ -37,7 +37,7 @@ function start(){
  clearInterval(clock);clearInterval(spawnLoop);clearTimeout(moleTimeout);
  score=0;hits=0;runCoins=0;remaining=60;active=-1;gameRunning=true;deadline=Date.now()+60000;
  $('score').textContent='0';$('runCoins').textContent='0';$('hits').textContent='Zásahy: 0';$('time').textContent='01:00';$('toast').textContent='';
- $('playerStage').classList.toggle('girl',gender==='girl');
+ $('playerStage').classList.toggle('girl',gender==='girl');$('playerStage').querySelector('.player-skin-img').src=gender==='girl'?'assets/girl.jpg':'assets/boy.jpg';
  $('swing').classList.remove('show');makeHoles();show('game');
  spawnMole();spawnLoop=setInterval(spawnMole,700);clock=setInterval(updateClock,100);
 }
