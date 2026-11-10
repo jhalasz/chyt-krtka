@@ -19,7 +19,7 @@ h1{font-size:clamp(30px,7vw,46px);margin:4px 0}
 .board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,2.5vw,15px);width:min(100%,440px);margin:18px auto}
 .hole{aspect-ratio:1;border:0;border-radius:50%;background:#75472d;box-shadow:inset 0 8px 0 #56331f,0 5px 0 #6f482e;position:relative;display:grid;place-items:center;overflow:hidden;touch-action:manipulation;cursor:pointer}
 .hole:focus-visible{outline:4px solid #f0b429;outline-offset:3px}
-.mole{font-size:clamp(42px,11vw,70px);line-height:1;transform:translateY(3px);user-select:none}
+.mole{display:block;width:82%;height:82%;max-width:100px;max-height:100px;transform:translateY(5px);user-select:none;pointer-events:none}
 .hole:not(.up) .mole{visibility:hidden}
 .hole.up{background:#a96e43}
 .controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px 0 8px}
@@ -43,15 +43,114 @@ button.action{border:0;border-radius:14px;padding:13px 22px;font:700 17px system
 <div class="stat"><strong id="best">0</strong><span>Rekord</span></div>
 </section>
 <div class="board" id="board" aria-label="Herní plocha">
-<button class="hole" type="button" aria-label="Díra 1" data-hole="0"><span class="mole" aria-hidden="true">🐹</span></button>
-<button class="hole" type="button" aria-label="Díra 2" data-hole="1"><span class="mole" aria-hidden="true">🐹</span></button>
-<button class="hole" type="button" aria-label="Díra 3" data-hole="2"><span class="mole" aria-hidden="true">🐹</span></button>
-<button class="hole" type="button" aria-label="Díra 4" data-hole="3"><span class="mole" aria-hidden="true">🐹</span></button>
-<button class="hole" type="button" aria-label="Díra 5" data-hole="4"><span class="mole" aria-hidden="true">🐹</span></button>
-<button class="hole" type="button" aria-label="Díra 6" data-hole="5"><span class="mole" aria-hidden="true">🐹</span></button>
-<button class="hole" type="button" aria-label="Díra 7" data-hole="6"><span class="mole" aria-hidden="true">🐹</span></button>
-<button class="hole" type="button" aria-label="Díra 8" data-hole="7"><span class="mole" aria-hidden="true">🐹</span></button>
-<button class="hole" type="button" aria-label="Díra 9" data-hole="8"><span class="mole" aria-hidden="true">🐹</span></button>
+<button class="hole" type="button" aria-label="Díra 1" data-hole="0"><span class="mole" aria-hidden="true"><svg viewBox="0 0 120 120" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="60" cy="72" rx="42" ry="43" fill="#76503b"/>
+<ellipse cx="29" cy="45" rx="13" ry="17" fill="#76503b"/><ellipse cx="91" cy="45" rx="13" ry="17" fill="#76503b"/>
+<ellipse cx="29" cy="46" rx="6" ry="9" fill="#c98e83"/><ellipse cx="91" cy="46" rx="6" ry="9" fill="#c98e83"/>
+<ellipse cx="45" cy="65" rx="5" ry="7" fill="#171717"/><ellipse cx="75" cy="65" rx="5" ry="7" fill="#171717"/>
+<path d="M49 79 Q60 69 71 79 L66 96 Q60 103 54 96Z" fill="#c98e83"/>
+<ellipse cx="60" cy="82" rx="7" ry="5" fill="#e6a6a0"/>
+<path d="M54 94 Q60 98 66 94" fill="none" stroke="#39271f" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M47 83 L18 77 M46 88 L17 91 M73 83 L102 77 M74 88 L103 91" stroke="#f0d8c7" stroke-width="2" stroke-linecap="round"/>
+<path d="M25 103 Q17 107 15 116 M37 108 L32 118 M95 103 Q103 107 105 116 M83 108 L88 118" fill="none" stroke="#76503b" stroke-width="8" stroke-linecap="round"/>
+<path d="M15 116l-4 2 M32 118l-4 1 M105 116l4 2 M88 118l4 1" stroke="#30231d" stroke-width="2.5" stroke-linecap="round"/>
+</svg></span></button>
+<button class="hole" type="button" aria-label="Díra 2" data-hole="1"><span class="mole" aria-hidden="true"><svg viewBox="0 0 120 120" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="60" cy="72" rx="42" ry="43" fill="#76503b"/>
+<ellipse cx="29" cy="45" rx="13" ry="17" fill="#76503b"/><ellipse cx="91" cy="45" rx="13" ry="17" fill="#76503b"/>
+<ellipse cx="29" cy="46" rx="6" ry="9" fill="#c98e83"/><ellipse cx="91" cy="46" rx="6" ry="9" fill="#c98e83"/>
+<ellipse cx="45" cy="65" rx="5" ry="7" fill="#171717"/><ellipse cx="75" cy="65" rx="5" ry="7" fill="#171717"/>
+<path d="M49 79 Q60 69 71 79 L66 96 Q60 103 54 96Z" fill="#c98e83"/>
+<ellipse cx="60" cy="82" rx="7" ry="5" fill="#e6a6a0"/>
+<path d="M54 94 Q60 98 66 94" fill="none" stroke="#39271f" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M47 83 L18 77 M46 88 L17 91 M73 83 L102 77 M74 88 L103 91" stroke="#f0d8c7" stroke-width="2" stroke-linecap="round"/>
+<path d="M25 103 Q17 107 15 116 M37 108 L32 118 M95 103 Q103 107 105 116 M83 108 L88 118" fill="none" stroke="#76503b" stroke-width="8" stroke-linecap="round"/>
+<path d="M15 116l-4 2 M32 118l-4 1 M105 116l4 2 M88 118l4 1" stroke="#30231d" stroke-width="2.5" stroke-linecap="round"/>
+</svg></span></button>
+<button class="hole" type="button" aria-label="Díra 3" data-hole="2"><span class="mole" aria-hidden="true"><svg viewBox="0 0 120 120" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="60" cy="72" rx="42" ry="43" fill="#76503b"/>
+<ellipse cx="29" cy="45" rx="13" ry="17" fill="#76503b"/><ellipse cx="91" cy="45" rx="13" ry="17" fill="#76503b"/>
+<ellipse cx="29" cy="46" rx="6" ry="9" fill="#c98e83"/><ellipse cx="91" cy="46" rx="6" ry="9" fill="#c98e83"/>
+<ellipse cx="45" cy="65" rx="5" ry="7" fill="#171717"/><ellipse cx="75" cy="65" rx="5" ry="7" fill="#171717"/>
+<path d="M49 79 Q60 69 71 79 L66 96 Q60 103 54 96Z" fill="#c98e83"/>
+<ellipse cx="60" cy="82" rx="7" ry="5" fill="#e6a6a0"/>
+<path d="M54 94 Q60 98 66 94" fill="none" stroke="#39271f" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M47 83 L18 77 M46 88 L17 91 M73 83 L102 77 M74 88 L103 91" stroke="#f0d8c7" stroke-width="2" stroke-linecap="round"/>
+<path d="M25 103 Q17 107 15 116 M37 108 L32 118 M95 103 Q103 107 105 116 M83 108 L88 118" fill="none" stroke="#76503b" stroke-width="8" stroke-linecap="round"/>
+<path d="M15 116l-4 2 M32 118l-4 1 M105 116l4 2 M88 118l4 1" stroke="#30231d" stroke-width="2.5" stroke-linecap="round"/>
+</svg></span></button>
+<button class="hole" type="button" aria-label="Díra 4" data-hole="3"><span class="mole" aria-hidden="true"><svg viewBox="0 0 120 120" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="60" cy="72" rx="42" ry="43" fill="#76503b"/>
+<ellipse cx="29" cy="45" rx="13" ry="17" fill="#76503b"/><ellipse cx="91" cy="45" rx="13" ry="17" fill="#76503b"/>
+<ellipse cx="29" cy="46" rx="6" ry="9" fill="#c98e83"/><ellipse cx="91" cy="46" rx="6" ry="9" fill="#c98e83"/>
+<ellipse cx="45" cy="65" rx="5" ry="7" fill="#171717"/><ellipse cx="75" cy="65" rx="5" ry="7" fill="#171717"/>
+<path d="M49 79 Q60 69 71 79 L66 96 Q60 103 54 96Z" fill="#c98e83"/>
+<ellipse cx="60" cy="82" rx="7" ry="5" fill="#e6a6a0"/>
+<path d="M54 94 Q60 98 66 94" fill="none" stroke="#39271f" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M47 83 L18 77 M46 88 L17 91 M73 83 L102 77 M74 88 L103 91" stroke="#f0d8c7" stroke-width="2" stroke-linecap="round"/>
+<path d="M25 103 Q17 107 15 116 M37 108 L32 118 M95 103 Q103 107 105 116 M83 108 L88 118" fill="none" stroke="#76503b" stroke-width="8" stroke-linecap="round"/>
+<path d="M15 116l-4 2 M32 118l-4 1 M105 116l4 2 M88 118l4 1" stroke="#30231d" stroke-width="2.5" stroke-linecap="round"/>
+</svg></span></button>
+<button class="hole" type="button" aria-label="Díra 5" data-hole="4"><span class="mole" aria-hidden="true"><svg viewBox="0 0 120 120" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="60" cy="72" rx="42" ry="43" fill="#76503b"/>
+<ellipse cx="29" cy="45" rx="13" ry="17" fill="#76503b"/><ellipse cx="91" cy="45" rx="13" ry="17" fill="#76503b"/>
+<ellipse cx="29" cy="46" rx="6" ry="9" fill="#c98e83"/><ellipse cx="91" cy="46" rx="6" ry="9" fill="#c98e83"/>
+<ellipse cx="45" cy="65" rx="5" ry="7" fill="#171717"/><ellipse cx="75" cy="65" rx="5" ry="7" fill="#171717"/>
+<path d="M49 79 Q60 69 71 79 L66 96 Q60 103 54 96Z" fill="#c98e83"/>
+<ellipse cx="60" cy="82" rx="7" ry="5" fill="#e6a6a0"/>
+<path d="M54 94 Q60 98 66 94" fill="none" stroke="#39271f" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M47 83 L18 77 M46 88 L17 91 M73 83 L102 77 M74 88 L103 91" stroke="#f0d8c7" stroke-width="2" stroke-linecap="round"/>
+<path d="M25 103 Q17 107 15 116 M37 108 L32 118 M95 103 Q103 107 105 116 M83 108 L88 118" fill="none" stroke="#76503b" stroke-width="8" stroke-linecap="round"/>
+<path d="M15 116l-4 2 M32 118l-4 1 M105 116l4 2 M88 118l4 1" stroke="#30231d" stroke-width="2.5" stroke-linecap="round"/>
+</svg></span></button>
+<button class="hole" type="button" aria-label="Díra 6" data-hole="5"><span class="mole" aria-hidden="true"><svg viewBox="0 0 120 120" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="60" cy="72" rx="42" ry="43" fill="#76503b"/>
+<ellipse cx="29" cy="45" rx="13" ry="17" fill="#76503b"/><ellipse cx="91" cy="45" rx="13" ry="17" fill="#76503b"/>
+<ellipse cx="29" cy="46" rx="6" ry="9" fill="#c98e83"/><ellipse cx="91" cy="46" rx="6" ry="9" fill="#c98e83"/>
+<ellipse cx="45" cy="65" rx="5" ry="7" fill="#171717"/><ellipse cx="75" cy="65" rx="5" ry="7" fill="#171717"/>
+<path d="M49 79 Q60 69 71 79 L66 96 Q60 103 54 96Z" fill="#c98e83"/>
+<ellipse cx="60" cy="82" rx="7" ry="5" fill="#e6a6a0"/>
+<path d="M54 94 Q60 98 66 94" fill="none" stroke="#39271f" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M47 83 L18 77 M46 88 L17 91 M73 83 L102 77 M74 88 L103 91" stroke="#f0d8c7" stroke-width="2" stroke-linecap="round"/>
+<path d="M25 103 Q17 107 15 116 M37 108 L32 118 M95 103 Q103 107 105 116 M83 108 L88 118" fill="none" stroke="#76503b" stroke-width="8" stroke-linecap="round"/>
+<path d="M15 116l-4 2 M32 118l-4 1 M105 116l4 2 M88 118l4 1" stroke="#30231d" stroke-width="2.5" stroke-linecap="round"/>
+</svg></span></button>
+<button class="hole" type="button" aria-label="Díra 7" data-hole="6"><span class="mole" aria-hidden="true"><svg viewBox="0 0 120 120" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="60" cy="72" rx="42" ry="43" fill="#76503b"/>
+<ellipse cx="29" cy="45" rx="13" ry="17" fill="#76503b"/><ellipse cx="91" cy="45" rx="13" ry="17" fill="#76503b"/>
+<ellipse cx="29" cy="46" rx="6" ry="9" fill="#c98e83"/><ellipse cx="91" cy="46" rx="6" ry="9" fill="#c98e83"/>
+<ellipse cx="45" cy="65" rx="5" ry="7" fill="#171717"/><ellipse cx="75" cy="65" rx="5" ry="7" fill="#171717"/>
+<path d="M49 79 Q60 69 71 79 L66 96 Q60 103 54 96Z" fill="#c98e83"/>
+<ellipse cx="60" cy="82" rx="7" ry="5" fill="#e6a6a0"/>
+<path d="M54 94 Q60 98 66 94" fill="none" stroke="#39271f" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M47 83 L18 77 M46 88 L17 91 M73 83 L102 77 M74 88 L103 91" stroke="#f0d8c7" stroke-width="2" stroke-linecap="round"/>
+<path d="M25 103 Q17 107 15 116 M37 108 L32 118 M95 103 Q103 107 105 116 M83 108 L88 118" fill="none" stroke="#76503b" stroke-width="8" stroke-linecap="round"/>
+<path d="M15 116l-4 2 M32 118l-4 1 M105 116l4 2 M88 118l4 1" stroke="#30231d" stroke-width="2.5" stroke-linecap="round"/>
+</svg></span></button>
+<button class="hole" type="button" aria-label="Díra 8" data-hole="7"><span class="mole" aria-hidden="true"><svg viewBox="0 0 120 120" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="60" cy="72" rx="42" ry="43" fill="#76503b"/>
+<ellipse cx="29" cy="45" rx="13" ry="17" fill="#76503b"/><ellipse cx="91" cy="45" rx="13" ry="17" fill="#76503b"/>
+<ellipse cx="29" cy="46" rx="6" ry="9" fill="#c98e83"/><ellipse cx="91" cy="46" rx="6" ry="9" fill="#c98e83"/>
+<ellipse cx="45" cy="65" rx="5" ry="7" fill="#171717"/><ellipse cx="75" cy="65" rx="5" ry="7" fill="#171717"/>
+<path d="M49 79 Q60 69 71 79 L66 96 Q60 103 54 96Z" fill="#c98e83"/>
+<ellipse cx="60" cy="82" rx="7" ry="5" fill="#e6a6a0"/>
+<path d="M54 94 Q60 98 66 94" fill="none" stroke="#39271f" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M47 83 L18 77 M46 88 L17 91 M73 83 L102 77 M74 88 L103 91" stroke="#f0d8c7" stroke-width="2" stroke-linecap="round"/>
+<path d="M25 103 Q17 107 15 116 M37 108 L32 118 M95 103 Q103 107 105 116 M83 108 L88 118" fill="none" stroke="#76503b" stroke-width="8" stroke-linecap="round"/>
+<path d="M15 116l-4 2 M32 118l-4 1 M105 116l4 2 M88 118l4 1" stroke="#30231d" stroke-width="2.5" stroke-linecap="round"/>
+</svg></span></button>
+<button class="hole" type="button" aria-label="Díra 9" data-hole="8"><span class="mole" aria-hidden="true"><svg viewBox="0 0 120 120" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="60" cy="72" rx="42" ry="43" fill="#76503b"/>
+<ellipse cx="29" cy="45" rx="13" ry="17" fill="#76503b"/><ellipse cx="91" cy="45" rx="13" ry="17" fill="#76503b"/>
+<ellipse cx="29" cy="46" rx="6" ry="9" fill="#c98e83"/><ellipse cx="91" cy="46" rx="6" ry="9" fill="#c98e83"/>
+<ellipse cx="45" cy="65" rx="5" ry="7" fill="#171717"/><ellipse cx="75" cy="65" rx="5" ry="7" fill="#171717"/>
+<path d="M49 79 Q60 69 71 79 L66 96 Q60 103 54 96Z" fill="#c98e83"/>
+<ellipse cx="60" cy="82" rx="7" ry="5" fill="#e6a6a0"/>
+<path d="M54 94 Q60 98 66 94" fill="none" stroke="#39271f" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M47 83 L18 77 M46 88 L17 91 M73 83 L102 77 M74 88 L103 91" stroke="#f0d8c7" stroke-width="2" stroke-linecap="round"/>
+<path d="M25 103 Q17 107 15 116 M37 108 L32 118 M95 103 Q103 107 105 116 M83 108 L88 118" fill="none" stroke="#76503b" stroke-width="8" stroke-linecap="round"/>
+<path d="M15 116l-4 2 M32 118l-4 1 M105 116l4 2 M88 118l4 1" stroke="#30231d" stroke-width="2.5" stroke-linecap="round"/>
+</svg></span></button>
 </div>
 <div class="controls">
 <button class="action" id="start" type="button">▶ Začít hru</button>
@@ -59,7 +158,7 @@ button.action{border:0;border-radius:14px;padding:13px 22px;font:700 17px system
 </div>
 <p id="message" role="status" aria-live="polite">Připrav se! Máš 30 sekund.</p>
 <p class="help">Za každého chyceného krtka získáš 1 bod. Krtek postupně zrychluje!</p>
-<p class="version">Chyť krtka · skupina 2 · verze 1.0</p>
+<p class="version">Chyť krtka · skupina 2 · verze 1.1</p>
 </main>
 <script>
 (() => {
