@@ -18,15 +18,21 @@ button,input{font:inherit}button{cursor:pointer;border:0;border-radius:18px;padd
 .cup{position:relative;min-height:115px;border-radius:22px;background:linear-gradient(180deg,#fff,#e9f5ff);border:4px solid #fff;box-shadow:0 8px 0 #b8c9dd,0 12px 18px #426b5540;display:flex;align-items:end;justify-content:center;padding:8px;overflow:hidden}
 .cup:before{content:"";position:absolute;top:10px;left:17%;width:66%;height:20px;border-radius:50%;background:linear-gradient(#4b251b,#a65a35);border:3px solid #fff}
 .cup:after{content:"";position:absolute;right:-13px;top:38px;width:27px;height:42px;border:8px solid #fff;border-left:0;border-radius:0 20px 20px 0}
-.mole{position:absolute;z-index:2;bottom:15px;width:75px;height:75px;border-radius:48% 48% 42% 42%;border:3px solid #7a4b35;background:radial-gradient(circle at 35% 25%,#fff4dc,#b9784d 70%);display:flex;align-items:center;justify-content:center;font-size:33px;filter:drop-shadow(0 3px 2px #654);animation:pop .22s ease-out}
-.mole.red{background:radial-gradient(circle at 35% 25%,#fff1d8,#d98745 70%)}.mole.silver{background:radial-gradient(circle at 35% 25%,#fff,#9ca8b9 70%)}.mole.rainbow{background:conic-gradient(#ff6b6b,#ffd166,#7bd88f,#62c9ff,#bb8cff,#ff6b6b)}.mole.gold{background:radial-gradient(circle at 35% 25%,#fff9c7,#ffc928 70%);border-color:#bd8700}
+.mole{position:absolute;z-index:2;bottom:5px;width:92px;height:96px;border:0;background:transparent;display:block;filter:drop-shadow(0 4px 2px #654);animation:pop .22s ease-out;overflow:visible}
+.mole .head{position:absolute;left:8px;right:8px;bottom:0;height:82px;border:3px solid #65402f;border-radius:48% 48% 42% 42%;background:radial-gradient(circle at 35% 20%,#d9a078,#865238 72%);box-shadow:inset 0 -7px 0 #603d30}
+.mole .ear{position:absolute;top:5px;width:27px;height:28px;border:3px solid #65402f;border-radius:50%;background:#a96e50;z-index:-1}.mole .ear.left{left:7px}.mole .ear.right{right:7px}
+.mole .eye{position:absolute;top:29px;width:11px;height:14px;border-radius:50%;background:#211a18;border:2px solid white;box-shadow:0 0 5px #fff}.mole .eye.left{left:25px}.mole .eye.right{right:25px}
+.mole .muzzle{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);width:42px;height:27px;border-radius:50%;background:#f0c5a4;box-shadow:inset 0 -3px #d99d7d}
+.mole .nose{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);width:12px;height:9px;border-radius:50%;background:#56332e}
+.mole .smile{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);width:14px;height:7px;border-bottom:2px solid #70443a;border-radius:50%}
+.mole.red .head{background:radial-gradient(circle at 35% 20%,#ffd09a,#c36d36 72%)}.mole.silver .head{background:radial-gradient(circle at 35% 20%,#fff,#8996aa 72%)}.mole.rainbow .head{background:conic-gradient(#ff6b6b,#ffd166,#7bd88f,#62c9ff,#bb8cff,#ff6b6b)}.mole.gold .head{background:radial-gradient(circle at 35% 20%,#fff9c7,#e5a900 72%)}
 @keyframes pop{from{transform:translateY(45px) scale(.5)}to{transform:translateY(0) scale(1)}}
 .cup.hit{animation:wiggle .25s}@keyframes wiggle{25%{transform:rotate(-5deg)}75%{transform:rotate(5deg)}}
 .controls{text-align:center;position:relative;z-index:2;margin:10px}.bar{height:14px;max-width:500px;margin:10px auto;background:#ffffffa8;border:2px solid #fff;border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff83bd,#ffd34e);transition:width .2s}
 .panel{max-width:470px;margin:28px auto;background:#ffffffed;border:4px solid #fff;border-radius:26px;padding:24px;text-align:center;box-shadow:0 12px 30px #563d7040}.panel h2{margin:0 0 10px}.panel input{width:100%;padding:13px;border:2px solid #c8a8e8;border-radius:14px;margin:12px 0;color:var(--ink)}
 .hidden{display:none!important}.small{font-size:.9rem;opacity:.8}.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:15px}
 footer{text-align:center;padding:12px;font-size:.8rem;color:#452b62}
-@media(max-width:560px){.wrap{padding:9px}.garden{min-height:350px;padding:10px}.cups{gap:9px;margin-top:52px}.cup{min-height:100px;padding:4px}.mole{width:62px;height:62px;font-size:27px}.pill{padding:7px 10px;font-size:.9rem}}
+@media(max-width:560px){.wrap{padding:9px}.garden{min-height:350px;padding:10px}.cups{gap:9px;margin-top:52px}.cup{min-height:100px;padding:4px}.mole{width:82px;height:86px}.pill{padding:7px 10px;font-size:.9rem}}
 </style>
 </head>
 <body>
@@ -40,7 +46,7 @@ footer{text-align:center;padding:12px;font-size:.8rem;color:#452b62}
 <div class="actions"><button id="pauseBtn">⏸ Pauza</button><button id="restartBtn">↻ Začít znovu</button></div>
 </main>
 <section id="end" class="panel hidden"><h2 id="endTitle">Konec hry!</h2><p id="endText"></p><div class="actions"><button id="againBtn">Hrát znovu</button></div></section>
-<footer>Verze 1.0 · Hra skupiny 4</footer>
+<footer>Verze 1.7 · Hra skupiny 4</footer>
 </div>
 <script>
 (()=>{
@@ -51,7 +57,7 @@ for(let i=0;i<6;i++){const c=document.createElement("button");c.className="cup";
 function beep(freq=700,duration=.09){if(!sound)return;try{const C=window.AudioContext||window.webkitAudioContext;const ctx=new C(),o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=freq;o.type="sine";g.gain.setValueAtTime(.08,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+duration);o.start();o.stop(ctx.currentTime+duration)}catch(e){}}
 function update(){ $("score").textContent=score;$("level").textContent=level+1;$("caught").textContent=caught;$("goal").textContent=goals[level];$("time").textContent=Math.floor(time/60)+":"+String(time%60).padStart(2,"0");$("progress").style.width=(caught/goals[level]*100)+"%"}
 function clearMole(){cups.querySelectorAll(".mole").forEach(m=>m.remove());active=-1}
-function spawnMole(){if(!running||paused)return;clearMole();active=Math.floor(Math.random()*6);const mole=document.createElement("span");mole.className="mole "+skinClass[level];mole.textContent="🐹";mole.setAttribute("aria-label",skins[level]+" krtek");cups.children[active].appendChild(mole);spawn=setTimeout(()=>{if(running&&!paused){clearMole();spawnMole()}},Math.max(430,interval-level*120))}
+function spawnMole(){if(!running||paused)return;clearMole();active=Math.floor(Math.random()*6);const mole=document.createElement("span");mole.className="mole "+skinClass[level];mole.innerHTML='<span class="ear left"></span><span class="ear right"></span><span class="head"><i class="eye left"></i><i class="eye right"></i><i class="muzzle"></i><i class="nose"></i><i class="smile"></i></span>';mole.setAttribute("aria-label",skins[level]+" krtek");cups.children[active].appendChild(mole);spawn=setTimeout(()=>{if(running&&!paused){clearMole();spawnMole()}},Math.max(430,interval-level*120))}
 function tap(i){if(!running||paused)return;if(i===active){clearTimeout(spawn);clearMole();score++;caught++;beep(820,.08);$("message").textContent=["Jupí! 🐹","PLESK! 🎉","Kouzelný cink! ✨"][caught%3];cups.children[i].classList.add("hit");setTimeout(()=>cups.children[i].classList.remove("hit"),260);update();if(caught>=goals[level]){if(level===4){finish(true);return}level++;caught=0;interval=Math.max(500,interval-120);$("message").textContent="Skvělé! Získáváš "+skins[level-1]+" odměnu! 🌟";beep(1050,.2);update();setTimeout(()=>{if(running&&!paused)spawnMole()},850)}else setTimeout(()=>{if(running&&!paused)spawnMole()},220)}else{score=Math.max(0,score-1);$("message").textContent="Vedle! −1 bod 🙈";beep(220,.12);update()}}
 function stop(){clearInterval(tick);clearTimeout(spawn);clearMole();running=false}
 function finish(won){stop();$("game").classList.add("hidden");$("end").classList.remove("hidden");$("endTitle").textContent=won?"🎉 VYHRÁL/A JSI! 🥇":"⏰ ČAS VYPRŠEL!";$("endText").textContent=name+", tvoje skóre je "+score+" bodů. "+(won?"Získáváš zlatého krtka! 🐹":"Dostal/a ses do "+(level+1)+". levelu a chytil/a "+(goals.slice(0,level).reduce((a,b)=>a+b,0)+caught)+" krtků.") }
