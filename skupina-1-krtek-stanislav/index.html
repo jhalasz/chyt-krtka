@@ -7,19 +7,19 @@
 <style>
 :root{color-scheme:dark;font-family:system-ui,Arial,sans-serif}*{box-sizing:border-box}
 body{margin:0;background:#080e18;color:#fff;overflow:hidden;touch-action:manipulation}
-#game{position:relative;width:100vw;height:100dvh;min-height:520px;overflow:hidden;background:linear-gradient(#111b2b 0 12%,#242c37 48%,#090d13 100%);perspective:850px}
-.ceiling{position:absolute;inset:0 0 48%;background:repeating-linear-gradient(90deg,#353b42 0 12%,#252b32 12.5% 24%);clip-path:polygon(25% 0,75% 0,100% 100%,0 100%)}
-.tunnel{position:absolute;inset:4% 0 0;background:radial-gradient(ellipse at 50% 38%,#5a6063 0,#333b42 42%,#111923 78%);clip-path:polygon(25% 0,75% 0,100% 100%,0 100%)}
-.lamps{position:absolute;top:8%;left:15%;right:15%;height:12%;display:flex;justify-content:space-around;filter:drop-shadow(0 0 18px #ffd76a)}
-.lamps i{width:9%;height:10px;border-radius:50%;background:#ffe59a;box-shadow:0 0 20px 8px #ffd35b}
-.sign{position:absolute;z-index:2;top:14%;left:50%;transform:translateX(-50%);background:#183c55;border:3px solid #e5c56a;border-radius:7px;padding:5px 20px;font-weight:1000;letter-spacing:3px;box-shadow:0 0 18px #ffcf5a66}
+#game{position:relative;width:100vw;height:100dvh;min-height:520px;overflow:hidden;background:linear-gradient(#8fe7ff 0%,#b8f2ff 35%,#f6d99a 100%);perspective:850px}
+.ceiling{position:absolute;inset:0 0 48%;background:repeating-linear-gradient(90deg,#ffdc91 0 12%,#f4c477 12.5% 24%);border-bottom:10px solid #e99d56;clip-path:polygon(25% 0,75% 0,100% 100%,0 100%)}
+.tunnel{position:absolute;inset:4% 0 0;background:radial-gradient(ellipse at 50% 38%,#b7f4ff 0,#72c9df 45%,#3993b8 82%);clip-path:polygon(25% 0,75% 0,100% 100%,0 100%)}
+.lamps{position:absolute;top:8%;left:15%;right:15%;height:12%;display:flex;justify-content:space-around;filter:drop-shadow(0 0 18px #fff3a0)}
+.lamps i{width:9%;height:10px;border-radius:50%;background:#fff6b0;box-shadow:0 0 22px 9px #fff0a0}
+.sign{position:absolute;z-index:2;top:14%;left:50%;transform:translateX(-50%);background:#168b9d;border:3px solid #fff0a0;border-radius:7px;padding:5px 20px;font-weight:1000;letter-spacing:3px;box-shadow:0 0 18px #ffcf5a66}
 .world{position:absolute;inset:19% 0 0;transform-style:preserve-3d;transform:rotateX(12deg);transform-origin:50% 0}
-.floor{position:absolute;inset:0;background:repeating-linear-gradient(0deg,#282b2d 0 35px,#34383a 36px 39px);clip-path:polygon(39% 0,61% 0,100% 100%,0 100%)}
-.lane{position:absolute;top:0;bottom:0;width:33.333%;border-left:2px solid #b8a16c33;border-right:2px solid #b8a16c33}
+.floor{position:absolute;inset:0;background:repeating-linear-gradient(0deg,#e9c78c 0 35px,#f6dfad 36px 39px);clip-path:polygon(39% 0,61% 0,100% 100%,0 100%)}
+.lane{position:absolute;top:0;bottom:0;width:33.333%;border-left:3px solid #fff2c566;border-right:3px solid #fff2c566}
 .lane:nth-child(2){left:0}.lane:nth-child(3){left:33.333%}.lane:nth-child(4){left:66.666%}
-.rail{position:absolute;top:0;bottom:-5%;width:7px;background:linear-gradient(90deg,#56616a,#f4f0d8,#59636b);box-shadow:0 0 7px #cbd8e5;transform:perspective(400px) rotateX(-5deg);transform-origin:top}
+.rail{position:absolute;top:0;bottom:-5%;width:7px;background:linear-gradient(90deg,#8b9299,#fff7df,#8b9299);box-shadow:0 0 9px #fff5d5;transform:perspective(400px) rotateX(-5deg);transform-origin:top}
 .rail.r1{left:22%}.rail.r2{left:44%}.rail.r3{left:56%}.rail.r4{left:78%}
-.sleepers{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 35px,#8a6b4b 36px 43px,transparent 44px 62px);clip-path:polygon(38% 0,62% 0,100% 100%,0 100%);opacity:.9}
+.sleepers{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 35px,#b98250 36px 43px,transparent 44px 62px);clip-path:polygon(38% 0,62% 0,100% 100%,0 100%);opacity:.9}
 #player{position:absolute;z-index:6;bottom:9%;left:50%;width:78px;height:142px;transform:translateX(-50%);transition:left .14s;filter:drop-shadow(0 12px 7px #000b);transform-style:preserve-3d}
 .officer{position:absolute;bottom:0;left:8px;width:62px;height:78px;background:linear-gradient(90deg,#07366e,#1675bd 45%,#06427f);border:3px solid #082747;border-radius:18px 18px 13px 13px;box-shadow:inset -8px 0 #031f45}
 .officer:before{content:"★";position:absolute;right:7px;top:8px;color:#ffdf72;font-size:19px}
@@ -52,7 +52,7 @@ body{margin:0;background:#080e18;color:#fff;overflow:hidden;touch-action:manipul
 <div class="hud"><div class="pill">⭐ <span id="score">0</span> bodů</div><div class="pill">❤️ <span id="lives">5</span></div><div class="pill">⚡ Boosty: <span id="boosts">0</span></div><div class="pill">⏱️ <span id="boostTime">—</span></div><button id="boostButton" disabled>⚡ BOOST</button></div>
 <div id="player"><div class="cap"></div><div class="head">• •</div><div class="officer"></div><div class="legs"><i></i><i></i></div></div>
 <div class="controls"><button id="left">⬅️</button><button id="jump">⬆️ SKOK</button><button id="slide">⬇️ PODLÉZT</button><button id="right">➡️</button></div>
-<div id="overlay"><div class="panel"><h1>🚨 Krtek Stanislav</h1><p>Pomoz policistovi proběhnout 3D metrem! Uhýbej vlakům, přeskakuj zábrany a sbírej hranolky. Hra končí, až ztratíš všech 5 životů.</p><p><b>PC:</b> šipky ← →, ↑ skok, ↓ podlézt<br><b>Mobil / tablet:</b> tlačítka nebo přejetí prstem</p><button class="mainbtn" id="start">▶ ZAČÍT HRÁT</button><p class="small">Verze 0.2 · 3D metro</p></div></div>
+<div id="overlay"><div class="panel"><h1>🚨 Krtek Stanislav</h1><p>Pomoz policistovi proběhnout 3D metrem! Uhýbej vlakům, přeskakuj zábrany a sbírej hranolky. Hra končí, až ztratíš všech 5 životů.</p><p><b>PC:</b> šipky ← →, ↑ skok, ↓ podlézt<br><b>Mobil / tablet:</b> tlačítka nebo přejetí prstem</p><button class="mainbtn" id="start">▶ ZAČÍT HRÁT</button><p class="small">Verze 0.3 · 3D metro</p></div></div>
 </main>
 <script>
 (()=>{const $=id=>document.getElementById(id),game=$('game'),player=$('player');let lane=1,score=0,lives=5,boosts=0,boostLeft=0,running=false,objects=[],last=0,spawn=0,raf=0,clock=0;const centers=['16.666%','50%','83.333%'];function hud(){$('score').textContent=score;$('lives').textContent=lives;$('boosts').textContent=boosts;$('boostButton').disabled=!running||boosts<1;$('boostTime').textContent=boostLeft>0?boostLeft.toFixed(1)+' s':'—'}function place(){player.style.left=centers[lane]}function move(d){if(!running)return;lane=Math.max(0,Math.min(2,lane+d));place()}function pose(a){if(!running)return;player.classList.remove('jump','slide');void player.offsetWidth;player.classList.add(a);setTimeout(()=>player.classList.remove(a),650)}function spawnObj(){const l=Math.floor(Math.random()*3),r=Math.random(),kind=r<.25?'food':r<.67?'train':'barrier';const el=document.createElement('div');el.className='object '+kind;el.textContent=kind==='food'?'🍟':kind==='train'?'🚇':'🚧';el.style.left=centers[l];game.appendChild(el);objects.push({el,l,kind,y:-100,checked:false})}
