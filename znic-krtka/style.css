@@ -30,3 +30,43 @@
 .player-stage.girl .player-cap{background:#ed5b9d;border-color:#a92e68}
 .player-stage.girl .player-body{background:#ee83b1;border-color:#a92e68}
 @media(max-width:480px){.player-stage{transform:scale(.82);transform-origin:bottom left}.mole{width:75px;height:91px;bottom:18px}.mole .eyes{left:4px;width:65px}}
+
+/* VERZE 1.5 – veselé zahradní klání podle obrázku dětí */
+body{background:linear-gradient(#31b9ef 0%,#a6e8ff 28%,#79c84b 29%,#3f9b35 100%);color:#38200d}
+.app{max-width:1000px}
+header{background:linear-gradient(135deg,#8a481d,#c78339);border:5px solid #5a2c13;border-radius:24px;padding:12px 18px;box-shadow:0 7px 0 #4b2916}
+h1{color:#ffd52e;-webkit-text-stroke:1px #39200c;text-shadow:3px 4px #5a2b0b}
+.eyebrow,header small{color:#ffe8ad}
+.wallet{border:3px solid #8a4a1b;background:linear-gradient(#ffe99a,#f6ae27);color:#542b09}
+.panel{background:linear-gradient(#fff0c7,#ffd18a);border:6px solid #9a531d;box-shadow:0 9px 0 #67350f}
+.avatar{border:4px solid #a85a20;background:#fff6dc;box-shadow:0 4px 0 #9a5b2c}
+.avatar.selected{border-color:#ffb51e;box-shadow:0 0 0 4px #ffe18b,0 5px 0 #9a5b2c}
+.avatar-art{border:3px solid #70401e}
+.boy-art{background:linear-gradient(#55c6f4 0 58%,#2b70b6 58%)}
+.girl-art{background:linear-gradient(#ffc5e2 0 58%,#e85b9f 58%)}
+.avatar-art:before{top:15px;height:32px;width:100px;background:#1655a6;border:4px solid #103b75;border-radius:50% 50% 12px 12px}
+.girl-art:before{background:#ec4d9a;border-color:#a92e68}
+.avatar-art:after{bottom:0;height:35px;background:linear-gradient(transparent,#193d68)}
+.primary{background:linear-gradient(#ffe36c,#ffad16);border:3px solid #a75a0b;color:#4c2800;box-shadow:0 5px #8a480e}
+.secondary{background:linear-gradient(#ffe4ad,#e8a14b);border:2px solid #98511b;color:#512b10}
+.stats{background:linear-gradient(#9a5423,#633012);border:3px solid #e7a64e;color:#fff3c9}
+.stats b{color:#ffdf35}
+.field{border:7px solid #92501e;background:linear-gradient(#55c7f5 0 26%,#a4e46a 27% 68%,#54a938 69%);box-shadow:inset 0 0 0 4px #e6b96b}
+.field:before{content:"";position:absolute;left:0;right:0;top:24%;height:13%;background:repeating-linear-gradient(90deg,#87532d 0 12px,#d49a52 13px 23px);opacity:.9}
+.field:after{content:"🌼　🌿　🌼　🌱　🌼　🌿　🌼";position:absolute;left:2%;right:2%;bottom:2%;font-size:clamp(17px,3vw,28px);letter-spacing:8px;pointer-events:none}
+.hill{background:#70bf39}
+.hole{background:radial-gradient(ellipse,#28160d 0 48%,#82431e 50% 61%,#bd7b38 63% 75%,#e0a354 77%);box-shadow:0 7px 0 #75401e}
+.mole{width:clamp(90px,11vw,118px);height:112px;border:5px solid #44251b;border-radius:48% 48% 38% 38%;background:radial-gradient(ellipse at 50% 22%,#b98160 0 15%,#80503c 60%,#4b3028 100%);box-shadow:0 5px 0 #402316,0 0 0 3px #e5b46c}
+.mole:before{top:-27px;left:8px;width:73px;height:32px;background:#172b52;border:5px solid #090f20;box-shadow:0 3px 0 #090f20}
+.mole:after{content:"NY";top:-21px;left:34px;color:white;font-size:14px}
+.mole .eyes{top:31px;left:9px;width:74px;height:24px;background:#101010;color:#fff;border:3px solid #050505;letter-spacing:8px}
+.mole .nose{top:58px;left:34px;width:27px;height:21px;background:#ff8e91;border:3px solid #8e4540}
+.mole .teeth{top:80px;left:30px;width:34px;height:16px;border:2px solid #48271d}
+.player-stage{filter:drop-shadow(2px 3px 1px #3c2818)}
+.player-head{background:#f4c39a}
+.player-cap{background:#1555a9}
+.player-stage.girl .player-cap{background:#ed4e9b}
+.player-stage.girl .player-body{background:#ed79ae}
+.toast{color:#fff044;text-shadow:3px 3px #57280c,-1px -1px #57280c}
+footer{color:#fff6d4;text-shadow:1px 2px #315a1c}
+@media(max-width:520px){header{padding:9px 12px}.field{height:58vh;min-height:370px}.holes{inset:24% 2% 10%}.mole{width:79px;height:95px}.mole:before{width:61px}.mole .eyes{width:65px;left:4px}}
