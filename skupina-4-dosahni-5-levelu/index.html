@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#9bdbff">
+<title>Dosaň 5. levelu – Chyť krtka</title>
+<style>
+:root{--ink:#43245f;--pink:#ff72b6;--gold:#ffcf4a}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:linear-gradient(180deg,#a7e6ff 0%,#e8d7ff 48%,#a6eaa6 49%,#5ac77a 100%);overflow-x:hidden}
+button,input{font:inherit}button{cursor:pointer;border:0;border-radius:18px;padding:12px 20px;font-weight:800;color:#43245f;background:linear-gradient(135deg,#fff5a8,#ffb8d9);box-shadow:0 5px 0 #d77ca8;touch-action:manipulation}button:active{transform:translateY(3px);box-shadow:0 2px 0 #d77ca8}
+.wrap{max-width:1000px;margin:auto;padding:16px}.top{text-align:center;padding:8px}.top h1{font-size:clamp(1.7rem,5vw,3rem);margin:4px 0;text-shadow:2px 3px #fff}.top p{margin:2px}
+.hud{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:12px auto}.pill{background:#ffffffd9;border:2px solid #fff;border-radius:999px;padding:8px 15px;font-weight:800;box-shadow:0 3px 8px #633d7630}
+.garden{position:relative;overflow:hidden;border:5px solid #fff;border-radius:28px;background:linear-gradient(#c7efff 0 35%,#9ee99b 35% 100%);padding:18px;min-height:390px;box-shadow:0 12px 30px #553b7440}
+.garden:before{content:"✨  🌸       🦋       🌼        ✨";position:absolute;top:12px;left:0;width:100%;text-align:center;font-size:clamp(18px,4vw,30px);letter-spacing:8px;pointer-events:none}
+.garden:after{content:"🌷     🌻      🌷      🌼      🌷";position:absolute;bottom:5px;left:0;width:100%;text-align:center;font-size:clamp(20px,4vw,34px);pointer-events:none}
+.cups{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:700px;margin:55px auto 35px}
+.cup{position:relative;min-height:115px;border-radius:22px;background:linear-gradient(180deg,#fff,#e9f5ff);border:4px solid #fff;box-shadow:0 8px 0 #b8c9dd,0 12px 18px #426b5540;display:flex;align-items:end;justify-content:center;padding:8px;overflow:hidden}
+.cup:before{content:"";position:absolute;top:10px;left:17%;width:66%;height:20px;border-radius:50%;background:linear-gradient(#4b251b,#a65a35);border:3px solid #fff}
+.cup:after{content:"";position:absolute;right:-13px;top:38px;width:27px;height:42px;border:8px solid #fff;border-left:0;border-radius:0 20px 20px 0}
+.mole{position:absolute;z-index:2;bottom:15px;width:75px;height:75px;border-radius:48% 48% 42% 42%;border:3px solid #7a4b35;background:radial-gradient(circle at 35% 25%,#fff4dc,#b9784d 70%);display:flex;align-items:center;justify-content:center;font-size:33px;filter:drop-shadow(0 3px 2px #654);animation:pop .22s ease-out}
+.mole.red{background:radial-gradient(circle at 35% 25%,#fff1d8,#d98745 70%)}.mole.silver{background:radial-gradient(circle at 35% 25%,#fff,#9ca8b9 70%)}.mole.rainbow{background:conic-gradient(#ff6b6b,#ffd166,#7bd88f,#62c9ff,#bb8cff,#ff6b6b)}.mole.gold{background:radial-gradient(circle at 35% 25%,#fff9c7,#ffc928 70%);border-color:#bd8700}
+@keyframes pop{from{transform:translateY(45px) scale(.5)}to{transform:translateY(0) scale(1)}}
+.cup.hit{animation:wiggle .25s}@keyframes wiggle{25%{transform:rotate(-5deg)}75%{transform:rotate(5deg)}}
+.controls{text-align:center;position:relative;z-index:2;margin:10px}.bar{height:14px;max-width:500px;margin:10px auto;background:#ffffffa8;border:2px solid #fff;border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff83bd,#ffd34e);transition:width .2s}
+.panel{max-width:470px;margin:28px auto;background:#ffffffed;border:4px solid #fff;border-radius:26px;padding:24px;text-align:center;box-shadow:0 12px 30px #563d7040}.panel h2{margin:0 0 10px}.panel input{width:100%;padding:13px;border:2px solid #c8a8e8;border-radius:14px;margin:12px 0;color:var(--ink)}
+.hidden{display:none!important}.small{font-size:.9rem;opacity:.8}.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:15px}
+footer{text-align:center;padding:12px;font-size:.8rem;color:#452b62}
+@media(max-width:560px){.wrap{padding:9px}.garden{min-height:350px;padding:10px}.cups{gap:9px;margin-top:52px}.cup{min-height:100px;padding:4px}.mole{width:62px;height:62px;font-size:27px}.pill{padding:7px 10px;font-size:.9rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><h1>🌈 DOSÁHNI 5. LEVELU – CHYŤ KRTKA 🐹</h1><p>Chyť všechny krtky v pohádkové zahradě!</p></header>
+<section id="start" class="panel"><h2>Vítej, lovče krtků! ✨</h2><p>Jak se jmenuješ?</p><input id="player" maxlength="18" placeholder="Napiš svoje jméno" autocomplete="given-name"><p class="small">Máš 12 minut na zdolání pěti levelů. Za chycení získáš bod, za kliknutí vedle jeden bod ztratíš.</p><button id="startBtn">🎮 ZAČÍT HRÁT</button></section>
+<main id="game" class="hidden">
+<div class="hud"><span class="pill">👤 <b id="who">Hráč</b></span><span class="pill">⭐ Body: <b id="score">0</b></span><span class="pill">🏆 Level: <b id="level">1</b>/5</span><span class="pill">⏰ <b id="time">12:00</b></span><span class="pill">🐹 Chyceno: <b id="caught">0</b>/<b id="goal">6</b></span></div>
+<div class="bar"><span id="progress"></span></div>
+<section class="garden" id="garden" aria-label="Pohádková zahrada s hrnečky kakaa"><div class="cups" id="cups"></div><div class="controls"><div id="message">Najdi krtka v hrnečku!</div><button id="soundBtn">🔊 Zvuky zapnuté</button></div></section>
+<div class="actions"><button id="pauseBtn">⏸ Pauza</button><button id="restartBtn">↻ Začít znovu</button></div>
+</main>
+<section id="end" class="panel hidden"><h2 id="endTitle">Konec hry!</h2><p id="endText"></p><div class="actions"><button id="againBtn">Hrát znovu</button></div></section>
+<footer>Verze 1.0 · Hra skupiny 4</footer>
+</div>
+<script>
+(()=>{
+const goals=[6,12,18,20,30],skins=["hnědý","zrzavý","stříbrný","duhový","zlatý"],skinClass=["","red","silver","rainbow","gold"];
+const $=id=>document.getElementById(id);let score=0,level=0,caught=0,time=720,active=-1,running=false,paused=false,sound=true,tick=null,spawn=null,name="Hráč",interval=1150;
+const cups=$("cups");
+for(let i=0;i<6;i++){const c=document.createElement("button");c.className="cup";c.setAttribute("aria-label","Hrneček "+(i+1));c.addEventListener("click",()=>tap(i));cups.appendChild(c)}
+function beep(freq=700,duration=.09){if(!sound)return;try{const C=window.AudioContext||window.webkitAudioContext;const ctx=new C(),o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=freq;o.type="sine";g.gain.setValueAtTime(.08,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+duration);o.start();o.stop(ctx.currentTime+duration)}catch(e){}}
+function update(){ $("score").textContent=score;$("level").textContent=level+1;$("caught").textContent=caught;$("goal").textContent=goals[level];$("time").textContent=Math.floor(time/60)+":"+String(time%60).padStart(2,"0");$("progress").style.width=(caught/goals[level]*100)+"%"}
+function clearMole(){cups.querySelectorAll(".mole").forEach(m=>m.remove());active=-1}
+function spawnMole(){if(!running||paused)return;clearMole();active=Math.floor(Math.random()*6);const mole=document.createElement("span");mole.className="mole "+skinClass[level];mole.textContent="🐹";mole.setAttribute("aria-label",skins[level]+" krtek");cups.children[active].appendChild(mole);spawn=setTimeout(()=>{if(running&&!paused){clearMole();spawnMole()}},Math.max(430,interval-level*120))}
+function tap(i){if(!running||paused)return;if(i===active){clearTimeout(spawn);clearMole();score++;caught++;beep(820,.08);$("message").textContent=["Jupí! 🐹","PLESK! 🎉","Kouzelný cink! ✨"][caught%3];cups.children[i].classList.add("hit");setTimeout(()=>cups.children[i].classList.remove("hit"),260);update();if(caught>=goals[level]){if(level===4){finish(true);return}level++;caught=0;interval=Math.max(500,interval-120);$("message").textContent="Skvělé! Získáváš "+skins[level-1]+" odměnu! 🌟";beep(1050,.2);update();setTimeout(()=>{if(running&&!paused)spawnMole()},850)}else setTimeout(()=>{if(running&&!paused)spawnMole()},220)}else{score=Math.max(0,score-1);$("message").textContent="Vedle! −1 bod 🙈";beep(220,.12);update()}}
+function stop(){clearInterval(tick);clearTimeout(spawn);clearMole();running=false}
+function finish(won){stop();$("game").classList.add("hidden");$("end").classList.remove("hidden");$("endTitle").textContent=won?"🎉 VYHRÁL/A JSI! 🥇":"⏰ ČAS VYPRŠEL!";$("endText").textContent=name+", tvoje skóre je "+score+" bodů. "+(won?"Získáváš zlatého krtka! 🐹":"Dostal/a ses do "+(level+1)+". levelu a chytil/a "+(goals.slice(0,level).reduce((a,b)=>a+b,0)+caught)+" krtků.") }
+function begin(){name=$("player").value.trim()||"Hráč";score=0;level=0;caught=0;time=720;interval=1150;running=true;paused=false;$("who").textContent=name;$("start").classList.add("hidden");$("end").classList.add("hidden");$("game").classList.remove("hidden");$("pauseBtn").textContent="⏸ Pauza";$("message").textContent="Chytej krtky!";update();spawnMole();tick=setInterval(()=>{if(!running||paused)return;time--;update();if(time<=0)finish(false)},1000)}
+$("startBtn").addEventListener("click",begin);$("againBtn").addEventListener("click",()=>{$("end").classList.add("hidden");$("start").classList.remove("hidden")});$("restartBtn").addEventListener("click",()=>{stop();$("game").classList.add("hidden");$("start").classList.remove("hidden")});$("pauseBtn").addEventListener("click",()=>{if(!running)return;paused=!paused;$("pauseBtn").textContent=paused?"▶ Pokračovat":"⏸ Pauza";$("message").textContent=paused?"Pauza":"Pokračujeme!";if(!paused)spawnMole()});$("soundBtn").addEventListener("click",()=>{sound=!sound;$("soundBtn").textContent=sound?"🔊 Zvuky zapnuté":"🔇 Zvuky vypnuté"});$("garden").addEventListener("click",e=>{if(e.target===$("garden")||e.target===$("message")){if(running&&!paused){score=Math.max(0,score-1);$("message").textContent="Vedle! −1 bod 🙈";beep(220);update()}}});
+})();
+</script>
+</body></html>
