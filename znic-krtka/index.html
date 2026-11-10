@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#152e4d"><title>Znič krtka</title><link rel="stylesheet" href="style.css"></head>
 <body><main class="app">
-<header><div><div class="eyebrow">HERNÍ ARÉNA • 5. TŘÍDA</div><h1>🕳️ ZNIČ KRTKA</h1><small>Verze 1.3</small></div><div class="wallet">🪙 <b id="coins">0</b></div></header>
+<header><div><div class="eyebrow">HERNÍ ARÉNA • 5. TŘÍDA</div><h1>🕳️ ZNIČ KRTKA</h1><small>Verze 1.4</small></div><div class="wallet">🪙 <b id="coins">0</b></div></header>
 <section id="home" class="panel">
 <h2>Vyber si svou postavu</h2><p class="muted">Kdo vyrazí na krtka?</p>
 <div class="avatars">
@@ -13,10 +13,10 @@
 <p class="tip">Tref krtka klepnutím nebo kliknutím. Když ho mineš, zasměje se: „HAHA!“</p></section>
 <section id="game" class="hidden">
 <div class="stats"><div>⭐ BODY <b id="score">0</b></div><div>🪙 MINCE <b id="runCoins">0</b></div><div>⏱️ ČAS <b id="time">01:00</b></div></div>
-<div class="field"><div class="sun"></div><div class="hill"></div><div class="holes" id="holes"></div><div class="toast" id="toast"></div><div class="swing" id="swing" aria-hidden="true"></div><div class="player-stage" id="playerStage"></div></div>
+<div class="field"><div class="sun"></div><div class="hill"></div><div class="holes" id="holes"></div><div class="toast" id="toast"></div><div class="swing" id="swing" aria-hidden="true"></div><div class="player-stage" id="playerStage" aria-label="Vaše postava"><div class="player-cap"></div><div class="player-head"><span class="player-eyes">● ●</span><span class="player-smile"></span></div><div class="player-body"></div><div class="player-legs"><i></i><i></i></div></div></div>
 <div class="gamebottom"><span id="hits">Zásahy: 0</span><button id="quit" class="secondary">Ukončit hru</button></div>
 </section>
 <section id="result" class="panel hidden"><h2>🏆 KONEC HRY!</h2><div class="resultscore" id="finalScore">0</div><p id="reward"></p><button id="again" class="primary">HRÁT ZNOVU</button><button id="homeBtn" class="secondary">ZPĚT DO MENU</button></section>
 <section id="shop" class="panel hidden"><h2>🛍️ Obchod</h2><p class="muted">Nakupuj vzhledy za mince, které získáš hraním.</p><div id="shopItems" class="shopitems"></div><button id="shopBack" class="secondary">ZPĚT</button></section>
-<footer>Hraj chytře, tref přesně! <span>© Znič krtka • v1.3</span></footer>
+<footer>Hraj chytře, tref přesně! <span>© Znič krtka • v1.4</span></footer>
 </main><script src="game.js"></script></body></html>
